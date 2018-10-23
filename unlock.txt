@@ -1,0 +1,117 @@
+Saving.saveNumber("aTreeStep", 2);
+                
+                Saving.saveBool("mainMapDoneDesert", true);
+                Saving.saveBool("mainMapDoneBridge", true);
+                Saving.saveBool("mainMapDoneCaveEntrance", true);
+                Saving.saveBool("mainMapDonePier", true);
+                Saving.saveBool("mainMapDoneForest", true);
+                Saving.saveBool("mainMapDoneCastleEntrance", true);
+                
+                Saving.saveBool("gridItemPossessedMainMap", true);
+                Saving.saveBool("gridItemPossessedTimeRing", true);
+                Saving.saveBool("gridItemPossessedThirdHouseKey", true);
+                Saving.saveBool("gridItemPossessedBeginnersGrimoire", true);
+                
+                Saving.saveBool("gridItemPossessedFeather", true);
+                Saving.saveBool("gridItemPossessedPogoStick", true);
+                Saving.saveBool("gridItemPossessedHeartPlug", true);
+                Saving.saveBool("gridItemPossessedAdvancedGrimoire", true);
+                
+                Saving.saveBool("gridItemPossessedSponge", true);
+                Saving.saveBool("gridItemPossessedShellPowder", true);
+                Saving.saveBool("gridItemPossessedHeartPendant", true);
+                Saving.saveBool("gridItemPossessedBlackMagicGrimoire", true);
+                
+                Saving.saveBool("gridItemPossessedFortressKey", true);
+                Saving.saveBool("gridItemPossessedUnicornHorn", true);
+                Saving.saveBool("gridItemPossessedXinopherydonClaw", true);
+                Saving.saveBool("gridItemPossessedPitchfork", true);
+                
+                Saving.saveBool("gridItemPossessedRedSharkFin", true);
+                Saving.saveBool("gridItemPossessedGreenSharkFin", true);
+                Saving.saveBool("gridItemPossessedPurpleSharkFin", true);
+                
+                Saving.saveBool("gridItemPossessedTalkingCandy", true);
+                
+                Saving.saveBool("gridItemPossessedP", true);
+                Saving.saveBool("gridItemPossessedL", true);
+                Saving.saveBool("gridItemPossessedA", true);
+                Saving.saveBool("gridItemPossessedY", true);
+                
+                Saving.saveBool("eqItemGlovesRedEnchantedGloves", true);
+                Saving.saveBool("eqItemGlovesPinkEnchantedGloves", true);
+                //Saving.saveBool("eqItemWeaponWoodenSword", true);
+                Saving.saveBool("eqItemWeaponTrollBludgeon", true);
+                Saving.saveBool("eqItemWeaponTribalSpear", true);
+                Saving.saveBool("eqItemWeaponSummoningTribalSpear", true);
+                Saving.saveBool("eqItemWeaponMonkeyWizardStaff", true);
+                Saving.saveBool("eqItemWeaponGiantSpoon", true);
+                Saving.saveBool("eqItemHatOctopusKingCrown", true);
+                
+                Saving.saveBool("eqItemBootsBootsOfIntrospection", true);
+                
+                Saving.saveBool("eqItemBootsRocketBoots", true);
+                
+                Saving.saveBool("eqItemWeaponGiantSpoonOfDoom", true);
+                
+                Saving.saveBool("eqItemBodyArmoursEnchantedKnightBodyArmour", true);
+                
+                Saving.saveNumber("gameCandiesEatenCurrent", 500000000);
+                Saving.saveNumber("gameCandiesEatenMax", 500000000);
+                
+                Saving.saveNumber("playerHp", 1000);
+                
+                Saving.saveBool("questPlayerSpellHealthPotionHasSpell", true);
+                Saving.saveBool("questPlayerSpellTurtlePotionHasSpell", true);
+                Saving.saveBool("questPlayerSpellAntiGravityPotionHasSpell", true);
+                Saving.saveBool("questPlayerSpellBerserkPotionHasSpell", true);
+                Saving.saveBool("questPlayerSpellCloningPotionHasSpell", true);
+                Saving.saveBool("questPlayerSpellPPotionHasSpell", true);
+                Saving.saveBool("questPlayerSpellXPotionHasSpell", true);
+                
+                Saving.saveNumber("questPlayerSpellHealthPotionQuantity", 0);
+                Saving.saveNumber("questPlayerSpellTurtlePotionQuantity", 64084);
+                Saving.saveNumber("questPlayerSpellAntiGravityPotionQuantity", 47542);
+                Saving.saveNumber("questPlayerSpellBerserkPotionQuantity", 99549);
+                Saving.saveNumber("questPlayerSpellCloningPotionQuantity", 10050);
+                Saving.saveNumber("questPlayerSpellPPotionQuantity", 10085250);
+                Saving.saveNumber("questPlayerSpellXPotionQuantity", 10050999);
+                
+                //Saving.saveBool("gameDebug", true);
+                
+                Saving.saveNumber("gameCandiesCurrent", 5000000);
+                Saving.saveNumber("gameCandiesMax", 5000000);
+                
+                Saving.saveNumber("gameLollipopsCurrent", 5000000000);
+                Saving.saveNumber("gameLollipopsMax", 500000000000);
+                
+                Saving.saveNumber("gameChocolateBarsCurrent", 7);
+                Saving.saveNumber("gameChocolateBarsMax", 7);
+                
+                Saving.saveNumber("gamePainsAuChocolatCurrent", 7);
+                Saving.saveNumber("gamePainsAuChocolatMax", 7);
+                
+                Saving.saveBool("lonelyHouseTakeTheBoxDone", true);
+                
+                Saving.saveNumber("lollipopFarmPondHowManyLolligators", 0);
+                
+                Saving.saveBool("statusBarUnlocked", true);
+                Saving.saveBool("statusBarUnlockedCfg", true);
+                Saving.saveBool("statusBarUnlockedSave", true);
+                Saving.saveBool("statusBarUnlockedMap", true);
+                Saving.saveBool("statusBarUnlockedInventory", true);
+                Saving.saveBool("statusBarUnlockedLollipopFarm", true);
+                Saving.saveBool("statusBarUnlockedCauldron", true);
+                Saving.saveBool("statusBarUnlockedHealthBar", true);
+                Saving.saveBool("statusBarUnlockedInsideYourBox", true);
+                Saving.saveBool("statusBarUnlockedTheComputer", true);
+                Saving.saveBool("statusBarUnlockedTheArena", true);
+                
+                Saving.saveBool("castleKilledNougatMonster", true);
+                
+                Saving.saveBool("dragonDone", true);
+                Saving.saveBool("dragonUnlockedCyclops", true);
+                
+                Saving.saveBool("castleTowerFirstVisitDone", true);
+                
+                Saving.saveString("gameLanguage", "fr");
