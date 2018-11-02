@@ -59,6 +59,8 @@ var Game = /** @class */ (function () {
         this.lollipopsInCauldron = new Resource("gameLollipopsInCauldron");
         // Grid items
         this.gridItems = {};
+        //tokens
+        this.tokens = {};
         // EqItems
         this.weapons = {};
         this.hats = {};
@@ -563,6 +565,7 @@ var Game = /** @class */ (function () {
         this.addEqItem(new GiantSpoon(), this.weapons);
         this.addEqItem(new Scythe(), this.weapons);
         this.addEqItem(new GiantSpoonOfDoom(), this.weapons);
+        this.addEqItem(new SweetTooth(this.player), this.weapons);
         // Create hats
         this.addEqItem(new OctopusKingCrown(), this.hats);
         this.addEqItem(new OctopusKingCrownWithJaspers(), this.hats);

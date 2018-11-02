@@ -20,7 +20,7 @@ class Forge extends House{
     // Constructor
     constructor(game: Game){
         super(game);
-        
+        Saving.saveBool("haveSweeTooth", true);
         // If...
             // We didn't buy one of the first three items
         if((Saving.loadBool("forgeBoughtWoodenSword") == false || Saving.loadBool("forgeBoughtIronAxe") == false || Saving.loadBool("forgeBoughtPolishedSilverSword") == false)

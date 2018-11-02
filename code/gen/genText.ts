@@ -1723,6 +1723,8 @@ Database.addText("en.talkingCandySpeech1", "Hey! I'm the talking candy. Congratu
 Database.addText("en.talkingCandySpeech2", "Done! You can now enter it. I hope you liked the game :)");
 Database.addText("en.talkingCandyButton", "Yes!!");
 Database.addText("en.lighthousePuzzleResetButton", "Reset");
+Database.addText("en.eqItemWeaponSweetToothName", "The Legendary Sweet Tooth");
+Database.addText("en.eqItemWeaponSweetToothDescription", "The Legendary Sword that only those of the sweetest hearts can obtain!");
 Database.addText("es.mapVillageComment", "El Pueblo");
 Database.addText("es.mapFortressComment", "La Fortaleza del desierto");
 Database.addText("es.mapATreeComment", "Un árbol");

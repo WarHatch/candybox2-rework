@@ -24,6 +24,7 @@ var EqItem = /** @class */ (function (_super) {
     EqItem.prototype.getQuestEntityWeapon = function (quest, player) {
         return new QuestEntityWeapon(quest, player, new Naming("???", "???"));
     };
+    EqItem.prototype.getTokens = function () { };
     return EqItem;
 }(Item));
 //# sourceMappingURL=EqItem.js.map

@@ -1,5 +1,5 @@
 ///<reference path="Game.ts"/>
-///<reference path="C:\Users\Odysseus\Documents\Projects\candybox2\candybox2.github.io-master/libs/jquery.d.ts"/>
+///<reference path="C:\Users\Odysseus\Documents\Projects\candybox2\candybox2remastered\libs\jquery.d.ts"/>
 ///<reference path="./MainLoadingType.ts"/>
 var Main;
 (function (Main) {

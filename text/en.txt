@@ -688,3 +688,7 @@ en.talkingCandyButton
 Yes!!
 en.lighthousePuzzleResetButton
 Reset
+en.eqItemWeaponSweetToothName
+The Legendary Sweet Tooth
+en.eqItemWeaponSweetToothDescription
+The Legendary Sword that only those of the sweetest hearts can obtain!

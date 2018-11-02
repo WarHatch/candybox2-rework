@@ -86,6 +86,9 @@ class Game{
     
     // Grid items
     private gridItems: { [s: string]: GridItem; } = {};
+
+    //tokens
+    private tokens: { [s: string]: Token; } = {};
     
     // EqItems
     private weapons: { [s: string]: EqItem; } = {};
@@ -166,6 +169,8 @@ class Game{
         // We launch timeouts & intervals methods
         this.oneSecondIntervalId = window.setInterval(this.oneSecondMethod.bind(this), 1000);
         window.setTimeout(this.questMethod.bind(this), 100);
+
+
     }
     
     // Public methods
@@ -651,6 +656,7 @@ class Game{
         this.addEqItem(new GiantSpoon(), this.weapons);
         this.addEqItem(new Scythe(), this.weapons);
         this.addEqItem(new GiantSpoonOfDoom(), this.weapons);
+        this.addEqItem(new SweetTooth(this.player), this.weapons);
         
         // Create hats
         this.addEqItem(new OctopusKingCrown(), this.hats);

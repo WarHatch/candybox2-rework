@@ -31,16 +31,16 @@ class QuestEntityWeaponDelay{
         
         // Return the text depending on this delay
         switch(delay){
-            case 0: return "incredibly fast"; break;
-            case 1: return "very fast"; break;
-            case 2: return "fast"; break;
-            case 3: return "rather fast"; break;
+            case 0: return "incredibly fast";
+            case 1: return "very fast"; 
+            case 2: return "fast";
+            case 3: return "rather fast"; 
             case 4: return "medium speed";
-            case 5: return "rather slow"; break;
-            case 6: case 7: return "slow"; break;
-            case 8: case 9: return "very slow"; break;
-            case 10: case 11: case 12: case 13: case 14: return "incredibly slow"; break;
-            default: "couldn't be slower"; break;
+            case 5: return "rather slow"; 
+            case 6: case 7: return "slow";
+            case 8: case 9: return "very slow"; 
+            case 10: case 11: case 12: case 13: case 14: return "incredibly slow";
+            default: "couldn't be slower"; 
         }
     }
     

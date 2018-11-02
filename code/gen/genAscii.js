@@ -351,6 +351,30 @@ Database.addAscii("eqItems/weapons/summoningTribalSpear", 26, 29, [
     "        ||",
     "       ([])"
 ]);
+Database.addAscii("eqItems/weapons/sweetTooth", 14, 22, [
+    "      ^",
+    "	 /|\\",
+    "    //|\\\\",
+    "   // | \\\\",
+    "  //  |  \\\\",
+    " //   |   ||",
+    " \\\\  :*:  ||",
+    " //   |   ||",
+    "//    |   ||",
+    "\\\\   :*:  ||",
+    " \\\\   |   ||",
+    " //   |   ||",
+    "//   :*:  ||",
+    "\\\\    |   ||",
+    " \\\\___|___//",
+    "  \\\\_____//",
+    " [____v____]",
+    "     [X]",
+    "     [X]",
+    "     [X]",
+    "     [X]",
+    "     [X]"
+]);
 Database.addAscii("eqItems/weapons/tribalSpear", 16, 27, [
     "    /\\",
     "   //\\\\",
@@ -958,19 +982,6 @@ Database.addAscii("gridItems/redSharkFin", 14, 5, [
     "/    `.",
     "¯¯¯¯¯¯¯"
 ]);
-Database.addAscii("gridItems/RENAMEunicornHorn", 7, 4, [
-    "\\.",
-    " \\'.",
-    "  \\ '.",
-    "   \\,-'"
-]);
-Database.addAscii("gridItems/RENAMExinopherydonClaw", 12, 5, [
-    "    _.---.",
-    "  .'      '.",
-    " '  .-'-.  |",
-    "/ .'     '-'",
-    "|/"
-]);
 Database.addAscii("gridItems/shellPowder", 13, 5, [
     "   |z.-+);",
     "  -+|)='`%:",
@@ -1013,6 +1024,27 @@ Database.addAscii("gridItems/timeRing", 11, 9, [
     "((       ))",
     " \\\\     //",
     "  '-._.-'"
+]);
+Database.addAscii("gridItems/token", 11, 6, [
+    "   _____",
+    "  /     \\",
+    " /       \\",
+    "|  TOKEN  |",
+    " \\       /",
+    "  \\_____/"
+]);
+Database.addAscii("gridItems/unicornHorn", 7, 4, [
+    "\\.",
+    " \\'.",
+    "  \\ '.",
+    "   \\,-'"
+]);
+Database.addAscii("gridItems/xinopherydonClaw", 12, 5, [
+    "    _.---.",
+    "  .'      '.",
+    " '  .-'-.  |",
+    "/ .'     '-'",
+    "|/"
 ]);
 Database.addAscii("gridItems/y", 11, 6, [
     "   _____",
@@ -2538,14 +2570,6 @@ Database.addAscii("places/quests/forest/wolf/rightStanding", 7, 3, [
     " ___)''",
     "`|| ||"
 ]);
-Database.addAscii("places/quests/fortress/RENAMExinopherydon", 17, 6, [
-    " ___",
-    "/o  \\___     ___",
-    "\\__     \\___/  o\\",
-    "   \\     _     _/",
-    "    \\   / \\   /",
-    "     \\_/   \\_/"
-]);
 Database.addAscii("places/quests/fortress/room1", 208, 31, [
     "        ~                ~                                 ~                               ~                                  ~                                                           ~                    ~",
     "________________________________________________________________________________________________________________________________________________________________________________________________________",
@@ -2638,6 +2662,14 @@ Database.addAscii("places/quests/fortress/teapot", 25, 6, [
     "  \\%;%%%%%%%%%%;%%\"",
     "   \\;%%%%%%%%%%;%.\"",
     "     \\________/ \""
+]);
+Database.addAscii("places/quests/fortress/xinopherydon", 17, 6, [
+    " ___",
+    "/o  \\___     ___",
+    "\\__     \\___/  o\\",
+    "   \\     _     _/",
+    "    \\   / \\   /",
+    "     \\_/   \\_/"
 ]);
 Database.addAscii("places/quests/giantNougatMonster/monster", 20, 4, [
     " .-'¨¨¨¨¨¨¨'.",

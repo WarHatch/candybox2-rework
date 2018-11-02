@@ -10,4 +10,5 @@ class EqItem extends Item{
     public getQuestEntityWeapon(quest: Quest, player: Player): QuestEntityWeapon{
         return new QuestEntityWeapon(quest, player, new Naming("???", "???")); 
     }
+    public getTokens(): void { }
 }

@@ -376,6 +376,31 @@ Database.addAscii("eqItems/weapons/summoningTribalSpear", 26, 29,
 "        ||",
 "       ([])"
 ]);
+Database.addAscii("eqItems/weapons/sweetTooth", 14, 22, 
+[
+"      ^",
+"	 /|\\",
+"    //|\\\\",
+"   // | \\\\",
+"  //  |  \\\\",
+" //   |   ||",
+" \\\\  :*:  ||",
+" //   |   ||",
+"//    |   ||",
+"\\\\   :*:  ||",
+" \\\\   |   ||",
+" //   |   ||",
+"//   :*:  ||",
+"\\\\    |   ||",
+" \\\\___|___//",
+"  \\\\_____//",
+" [____v____]",
+"     [X]",
+"     [X]",
+"     [X]",
+"     [X]",
+"     [X]"
+]);
 Database.addAscii("eqItems/weapons/tribalSpear", 16, 27, 
 [
 "    /\\",
@@ -1073,6 +1098,15 @@ Database.addAscii("gridItems/timeRing", 11, 9,
 "((       ))",
 " \\\\     //",
 "  '-._.-'"
+]);
+Database.addAscii("gridItems/token", 11, 6, 
+[
+"   _____",
+"  /     \\",
+" /       \\",
+"|  TOKEN  |",
+" \\       /",
+"  \\_____/"
 ]);
 Database.addAscii("gridItems/unicornHorn", 7, 4, 
 [

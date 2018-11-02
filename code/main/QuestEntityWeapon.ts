@@ -18,8 +18,14 @@ class QuestEntityWeapon{
         this.quest = quest;
         this.questEntity = questEntity;
         this.naming = naming;
-        this.damage = damage;
+        if (this.naming.getAnywhere() === 'the Sweet Tooth')
+        {
+            this.setDamage();
+        }
+        else
+            this.damage = damage;
         this.cbc = cbc;
+
     }
     
     // Public methods
@@ -82,4 +88,17 @@ class QuestEntityWeapon{
                                                                            .setQuestEntity(this.questEntity)
                                                                            .setQuestEntityWeapon(this));
     }
+
+    //This is exclusively for sweet tooths dynamic damage 
+    public setDamage(power: number = 0, fromToken: boolean = false): void{
+        if(this.naming.getAnywhere() === 'the Sweet Tooth')
+        {
+            this.damage = (this.questEntity.getHp() / 200);
+            if (fromToken) {
+                this.damage = (this.damage + (this.damage * (power / 10)));
+            }
+        }
+    }
+
+
 }
