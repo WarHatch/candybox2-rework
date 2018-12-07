@@ -40,3 +40,10 @@ in index.html.
 
 *index.html uses the compressed js file, while index - actually readable.js uses the 
 uncompressed file. this is very useful for debugging.
+************************************************************************************************
+CONTRIBUTION
+
+Do what you want, I really don't care. Feel free to create an extra branch. 
+
+Pull requests will need an explanation of the new features and bug fixes. I will review the 
+information and commit the pull.
