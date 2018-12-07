@@ -48,7 +48,7 @@ call yuicompressor ./candybox2_uncompressed.js.temp --type js --line-break 80 -o
 
 :: Create the candybox2.js file from the license and the temp file
 
-type candybox2_sourceCodeLicense.txt > candybox2.js.temp
+type candybox2_sourceCodeLicense.txt > candybox2.js
 type candybox2.js.temp >> candybox2.js
 
 :: Create the candybox2_uncompressed.js file from the license and the temp file
@@ -67,7 +67,6 @@ call 7z a candybox2.zip ascii code css libs pythonScripts text ascii_art.html ca
 
 :: Create the .zip file we will give to others if they want to work on the ascii art :)
 
-call 7z a ascii_art.zip ascii
 
 :end
 pause

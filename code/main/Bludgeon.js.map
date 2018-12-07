@@ -1,0 +1,1 @@
+{"version":3,"file":"Bludgeon.js","sourceRoot":"","sources":["Bludgeon.ts"],"names":[],"mappings":"AAAA,2CAA2C;;;;;;;;;;;;;;AAE3C;IAAuB,4BAAiB;IAAxC;;IASA,CAAC;IARG,iBAAiB;IACV,gCAAa,GAApB;QACI,OAAO,MAAM,CAAC,OAAO,CAAC,EAAE,EAAE,EAAE,CAAC,CAAC;IAClC,CAAC;IAEM,oCAAiB,GAAxB;QACI,OAAO,OAAO,CAAC;IACnB,CAAC;IACL,eAAC;AAAD,CAAC,AATD,CAAuB,iBAAiB,GASvC"}

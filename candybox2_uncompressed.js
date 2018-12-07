@@ -186,58 +186,61 @@ var Saving;
             case MainLoadingType.NONE:
                 // You can uncomment the lines below to start your game with everything unlocked (useful for testing purposes)
                 /*
-                Saving.saveNumber("aTreeStep", 2);
-                
-                Saving.saveBool("mainMapDoneDesert", true);
-                Saving.saveBool("mainMapDoneBridge", true);
-                Saving.saveBool("mainMapDoneCaveEntrance", true);
-                Saving.saveBool("mainMapDonePier", true);
-                Saving.saveBool("mainMapDoneForest", true);
-                Saving.saveBool("mainMapDoneCastleEntrance", true);
-                
-                Saving.saveBool("gridItemPossessedMainMap", true);
-                Saving.saveBool("gridItemPossessedTimeRing", true);
-                Saving.saveBool("gridItemPossessedThirdHouseKey", true);
-                Saving.saveBool("gridItemPossessedBeginnersGrimoire", true);
-                
-                Saving.saveBool("gridItemPossessedFeather", true);
-                Saving.saveBool("gridItemPossessedPogoStick", true);
-                Saving.saveBool("gridItemPossessedHeartPlug", true);
-                Saving.saveBool("gridItemPossessedAdvancedGrimoire", true);
-                
-                Saving.saveBool("gridItemPossessedSponge", true);
-                Saving.saveBool("gridItemPossessedShellPowder", true);
-                Saving.saveBool("gridItemPossessedHeartPendant", true);
-                Saving.saveBool("gridItemPossessedBlackMagicGrimoire", true);
-                
-                Saving.saveBool("gridItemPossessedFortressKey", true);
-                Saving.saveBool("gridItemPossessedUnicornHorn", true);
-                Saving.saveBool("gridItemPossessedXinopherydonClaw", true);
-                Saving.saveBool("gridItemPossessedPitchfork", true);
-                
-                Saving.saveBool("gridItemPossessedRedSharkFin", true);
-                Saving.saveBool("gridItemPossessedGreenSharkFin", true);
-                Saving.saveBool("gridItemPossessedPurpleSharkFin", true);
-                
-                Saving.saveBool("gridItemPossessedTalkingCandy", true);
-                
-                Saving.saveBool("gridItemPossessedP", true);
-                Saving.saveBool("gridItemPossessedL", true);
-                Saving.saveBool("gridItemPossessedA", true);
-                Saving.saveBool("gridItemPossessedY", true);
-                
-                Saving.saveBool("eqItemGlovesRedEnchantedGloves", true);
-                Saving.saveBool("eqItemGlovesPinkEnchantedGloves", true);
-                //Saving.saveBool("eqItemWeaponWoodenSword", true);
-                Saving.saveBool("eqItemWeaponTrollBludgeon", true);
-                Saving.saveBool("eqItemWeaponTribalSpear", true);
-                Saving.saveBool("eqItemWeaponSummoningTribalSpear", true);
-                Saving.saveBool("eqItemWeaponMonkeyWizardStaff", true);
-                Saving.saveBool("eqItemWeaponGiantSpoon", true);
-                Saving.saveBool("eqItemHatOctopusKingCrown", true);
-                
-                Saving.saveBool("eqItemBootsBootsOfIntrospection", true);
-                
+                   Saving.saveNumber("aTreeStep", 2);
+                   
+                   Saving.saveBool("mainMapDoneDesert", true);
+                   Saving.saveBool("mainMapDoneBridge", true);
+                   Saving.saveBool("mainMapDoneCaveEntrance", true);
+                   Saving.saveBool("mainMapDonePier", true);
+                   Saving.saveBool("mainMapDoneForest", true);
+                   Saving.saveBool("mainMapDoneCastleEntrance", true);
+                   
+                   Saving.saveBool("gridItemPossessedMainMap", true);
+                   Saving.saveBool("gridItemPossessedTimeRing", true);
+                   Saving.saveBool("gridItemPossessedThirdHouseKey", true);
+                   Saving.saveBool("gridItemPossessedBeginnersGrimoire", true);
+                   
+                   Saving.saveBool("gridItemPossessedFeather", true);
+                   Saving.saveBool("gridItemPossessedPogoStick", true);
+                   Saving.saveBool("gridItemPossessedHeartPlug", true);
+                   Saving.saveBool("gridItemPossessedAdvancedGrimoire", true);
+                   
+                   Saving.saveBool("gridItemPossessedSponge", true);
+                   Saving.saveBool("gridItemPossessedShellPowder", true);
+                   Saving.saveBool("gridItemPossessedHeartPendant", true);
+                   Saving.saveBool("gridItemPossessedBlackMagicGrimoire", true);
+                   
+                   Saving.saveBool("gridItemPossessedFortressKey", true);
+                   Saving.saveBool("gridItemPossessedUnicornHorn", true);
+                   Saving.saveBool("gridItemPossessedXinopherydonClaw", true);
+                   Saving.saveBool("gridItemPossessedPitchfork", true);
+                   
+                   Saving.saveBool("gridItemPossessedRedSharkFin", true);
+                   Saving.saveBool("gridItemPossessedGreenSharkFin", true);
+                   Saving.saveBool("gridItemPossessedPurpleSharkFin", true);
+                   
+                   Saving.saveBool("gridItemPossessedTalkingCandy", true);
+                   
+                   Saving.saveBool("gridItemPossessedP", true);
+                   Saving.saveBool("gridItemPossessedL", true);
+                   Saving.saveBool("gridItemPossessedA", true);
+                   Saving.saveBool("gridItemPossessedY", true);
+                   
+                   Saving.saveBool("eqItemGlovesRedEnchantedGloves", true);
+                   Saving.saveBool("eqItemGlovesPinkEnchantedGloves", true);
+                   Saving.saveBool("eqItemWeaponWoodenSword", true);
+                   Saving.saveBool("eqItemWeaponTrollBludgeon", true);
+                   Saving.saveBool("eqItemWeaponTribalSpear", true);
+                   Saving.saveBool("eqItemWeaponSummoningTribalSpear", true);
+                   Saving.saveBool("eqItemWeaponMonkeyWizardStaff", true);
+                   Saving.saveBool("eqItemWeaponGiantSpoon", true);
+                   Saving.saveBool("eqItemHatOctopusKingCrown", true);
+                   Saving.saveBool("eqItemBootsBootsOfIntrospection", true);
+                   */
+                //Initialize sweet tooth
+                Saving.saveBool("eqItemWeaponSweetTooth", true, true);
+                Saving.saveBool("statusBarUnlockedInventory", true);
+                /*
                 Saving.saveBool("eqItemBootsRocketBoots", true);
                 
                 Saving.saveBool("eqItemWeaponGiantSpoonOfDoom", true);
@@ -265,7 +268,7 @@ var Saving;
                 Saving.saveNumber("questPlayerSpellPPotionQuantity", 10085250);
                 Saving.saveNumber("questPlayerSpellXPotionQuantity", 10050999);
                 
-                //Saving.saveBool("gameDebug", true);
+               // Saving.saveBool("gameDebug", true);
                 
                 Saving.saveNumber("gameCandiesCurrent", 5000000);
                 Saving.saveNumber("gameCandiesMax", 5000000);
@@ -301,9 +304,8 @@ var Saving;
                 Saving.saveBool("dragonUnlockedCyclops", true);
                 
                 Saving.saveBool("castleTowerFirstVisitDone", true);
-                
-                Saving.saveString("gameLanguage", "fr");
-                */
+
+                Saving.saveBool("",true);*/
                 break;
             case MainLoadingType.LOCAL:
                 LocalSaving.load(loadingString);
@@ -345,10 +347,8 @@ var Saving;
         switch (savingType) {
             case MainLoadingType.LOCAL:
                 return LocalSaving.save(savingString);
-                break;
             case MainLoadingType.FILE:
                 return false;
-                break;
         }
     }
     Saving.save = save;
@@ -2661,7 +2661,11 @@ var QuestEntityWeapon = /** @class */ (function () {
         this.quest = quest;
         this.questEntity = questEntity;
         this.naming = naming;
-        this.damage = damage;
+        if (this.naming.getAnywhere() === 'the Sweet Tooth') {
+            this.setDamage();
+        }
+        else
+            this.damage = damage;
         this.cbc = cbc;
     }
     // Public methods
@@ -2714,6 +2718,17 @@ var QuestEntityWeapon = /** @class */ (function () {
         this.questEntity.hit(questEntity, this.getRealDamage(), new QuestEntityDamageReason(QuestEntityDamageReasonWhoType.ENTITY, QuestEntityDamageReasonWhatType.WEAPON)
             .setQuestEntity(this.questEntity)
             .setQuestEntityWeapon(this));
+    };
+    //This is exclusively for sweet tooths dynamic damage 
+    QuestEntityWeapon.prototype.setDamage = function (power, fromToken) {
+        if (power === void 0) { power = 0; }
+        if (fromToken === void 0) { fromToken = false; }
+        if (this.naming.getAnywhere() === 'the Sweet Tooth') {
+            this.damage = (this.questEntity.getHp() / 200);
+            if (fromToken) {
+                this.damage = (this.damage + (this.damage * (power / 10)));
+            }
+        }
     };
     return QuestEntityWeapon;
 }());
@@ -2787,6 +2802,7 @@ var EqItem = /** @class */ (function (_super) {
     EqItem.prototype.getQuestEntityWeapon = function (quest, player) {
         return new QuestEntityWeapon(quest, player, new Naming("???", "???"));
     };
+    EqItem.prototype.getTokens = function () { };
     return EqItem;
 }(Item));
 ///<reference path="EqItem.ts"/>
@@ -8347,6 +8363,7 @@ var Forge = /** @class */ (function (_super) {
         var _this = _super.call(this, game) || this;
         // The render area
         _this.renderArea = new RenderArea();
+        Saving.saveBool("haveSweeTooth", true);
         // If...
         // We didn't buy one of the first three items
         if ((Saving.loadBool("forgeBoughtWoodenSword") == false || Saving.loadBool("forgeBoughtIronAxe") == false || Saving.loadBool("forgeBoughtPolishedSilverSword") == false)
@@ -9478,6 +9495,8 @@ var Game = /** @class */ (function () {
         this.lollipopsInCauldron = new Resource("gameLollipopsInCauldron");
         // Grid items
         this.gridItems = {};
+        //tokens
+        this.tokens = {};
         // EqItems
         this.weapons = {};
         this.hats = {};
@@ -9982,6 +10001,7 @@ var Game = /** @class */ (function () {
         this.addEqItem(new GiantSpoon(), this.weapons);
         this.addEqItem(new Scythe(), this.weapons);
         this.addEqItem(new GiantSpoonOfDoom(), this.weapons);
+        this.addEqItem(new SweetTooth(this.player), this.weapons);
         // Create hats
         this.addEqItem(new OctopusKingCrown(), this.hats);
         this.addEqItem(new OctopusKingCrownWithJaspers(), this.hats);
@@ -12344,7 +12364,7 @@ var MainLoadingType;
     MainLoadingType[MainLoadingType["FILE"] = 2] = "FILE";
 })(MainLoadingType || (MainLoadingType = {}));
 ///<reference path="Game.ts"/>
-///<reference path="C:\Users\Odysseus\Documents\Projects\candybox2\candybox2.github.io-master/libs/jquery.d.ts"/>
+///<reference path="C:\Users\Odysseus\Documents\Projects\candybox2\candybox2remastered\libs\jquery.d.ts"/>
 ///<reference path="./MainLoadingType.ts"/>
 var Main;
 (function (Main) {
@@ -13677,16 +13697,12 @@ var Player = /** @class */ (function (_super) {
         switch (this.characterType) {
             case PlayerCharacterType.CANDYBOX:
                 return new CollisionBoxCollection(new CollisionBox(this, new Pos(-1, -1), new Pos(5, 3)));
-                break;
             case PlayerCharacterType.MEDIUM:
                 return new CollisionBoxCollection(new CollisionBox(this, new Pos(-1, -1), new Pos(13, 6)));
-                break;
             case PlayerCharacterType.CANDYBOX_SQUEEZED:
                 return new CollisionBoxCollection(new CollisionBox(this, new Pos(-1, -1), new Pos(3, 3)));
-                break;
             case PlayerCharacterType.MEDIUM_SQUEEZED:
                 return new CollisionBoxCollection(new CollisionBox(this, new Pos(-1, -1), new Pos(8, 5)));
-                break;
         }
     };
     Player.prototype.getQuestEntityWeapon = function (quest) {
@@ -13695,6 +13711,8 @@ var Player = /** @class */ (function (_super) {
         // If a weapon is equipped, we use the quest entity weapon it provides us
         if (this.game.getSelectedEqItems()["weapon"] != null) {
             qew = this.game.getSelectedEqItems()["weapon"].getQuestEntityWeapon(quest, this);
+            if (qew.getNaming().getAnywhere() == "the Sweet Tooth")
+                this.game.getSelectedEqItems()["weapon"].getTokens();
         }
         // Else, no weapon is equipped, we use our fists
         else {
@@ -13711,25 +13729,21 @@ var Player = /** @class */ (function (_super) {
                     return this.getGlobalPosition().plus(new Pos(3, -1));
                 else
                     return this.getGlobalPosition().plus(new Pos(-1, -1));
-                break;
             case PlayerCharacterType.MEDIUM:
                 if (facingRight)
                     return this.getGlobalPosition().plus(new Pos(11, 0));
                 else
                     return this.getGlobalPosition().plus(new Pos(-1, 0));
-                break;
             case PlayerCharacterType.CANDYBOX_SQUEEZED:
                 if (facingRight)
                     return this.getGlobalPosition().plus(new Pos(0, -1));
                 else
                     return this.getGlobalPosition().plus(new Pos(0, -1));
-                break;
             case PlayerCharacterType.MEDIUM_SQUEEZED:
                 if (facingRight)
                     return this.getGlobalPosition().plus(new Pos(6, 0));
                 else
                     return this.getGlobalPosition().plus(new Pos(-1, 0));
-                break;
         }
     };
     Player.prototype.getThornsPositionsArray = function () {
@@ -14761,40 +14775,22 @@ var QuestEntityWeaponDelay = /** @class */ (function () {
             delay = this.maxDelay;
         // Return the text depending on this delay
         switch (delay) {
-            case 0:
-                return "incredibly fast";
-                break;
-            case 1:
-                return "very fast";
-                break;
-            case 2:
-                return "fast";
-                break;
-            case 3:
-                return "rather fast";
-                break;
+            case 0: return "incredibly fast";
+            case 1: return "very fast";
+            case 2: return "fast";
+            case 3: return "rather fast";
             case 4: return "medium speed";
-            case 5:
-                return "rather slow";
-                break;
+            case 5: return "rather slow";
             case 6:
-            case 7:
-                return "slow";
-                break;
+            case 7: return "slow";
             case 8:
-            case 9:
-                return "very slow";
-                break;
+            case 9: return "very slow";
             case 10:
             case 11:
             case 12:
             case 13:
-            case 14:
-                return "incredibly slow";
-                break;
-            default:
-                "couldn't be slower";
-                break;
+            case 14: return "incredibly slow";
+            default: "couldn't be slower";
         }
     };
     QuestEntityWeaponDelay.prototype.tryToAttack = function () {
@@ -17619,6 +17615,31 @@ var SuperRPGStep;
     SuperRPGStep[SuperRPGStep["GAME"] = 1] = "GAME";
     SuperRPGStep[SuperRPGStep["LOSE"] = 2] = "LOSE";
 })(SuperRPGStep || (SuperRPGStep = {}));
+///<reference path="EqItem.ts"/>
+var SweetTooth = /** @class */ (function (_super) {
+    __extends(SweetTooth, _super);
+    // private player: Player;
+    // Constructor
+    function SweetTooth(player) {
+        var _this = _super.call(this, "eqItemWeaponSweetTooth", "eqItemWeaponSweetToothName", "eqItemWeaponSweetToothDescription", "eqItems/weapons/sweetTooth") || this;
+        //private variables
+        _this.tokensEq = [new Token(TokenType.FIRE, 2, _this), new Token(TokenType.PURPLE, 2, _this), new Token(TokenType.REGEN, 2, _this)];
+        return _this;
+    }
+    // Public getters
+    SweetTooth.prototype.getQuestEntityWeapon = function (quest, player) {
+        var qew = new QuestEntityWeapon(quest, player, new Naming("The Legendary Sweet Tooth", "the Sweet Tooth"), player.getClassicCollisionBoxCollection(), 0 // the sweet tooth only gives power to those of the sweetest hearts
+        );
+        // qew.getCloseCombatDelay().setFixedDelay();
+        return qew;
+    };
+    SweetTooth.prototype.update = function (player, quest) {
+        for (var tokens in this.tokensEq) {
+            this.tokensEq[tokens].update(player, quest);
+        }
+    };
+    return SweetTooth;
+}(EqItem));
 ///<reference path="QuestEntity.ts"/>
 var Teapot = /** @class */ (function (_super) {
     __extends(Teapot, _super);
@@ -20218,6 +20239,124 @@ var ThirdHouse = /** @class */ (function (_super) {
     };
     return ThirdHouse;
 }(House));
+///<reference path = "Item.ts"/>
+var Token = /** @class */ (function (_super) {
+    __extends(Token, _super);
+    function Token(type, power, sweetTooth) {
+        var _this = _super.call(this, "token", //savingName
+        "tokenName", //databaseName
+        "tokenDescription", //databaseDescriptionName 
+        "gridItems/token" //ascii 
+        ) || this;
+        _this.tokenType = null;
+        _this.power = 2;
+        //Unique variables
+        _this.currentTimer = 0;
+        _this.maxTimer = 10;
+        _this.applied = false;
+        _this.tokenType = type;
+        _this.power = power;
+        _this.sweetTooth = sweetTooth;
+        return _this;
+        /*switch (this.tokenType) {
+            case TokenType.SPEED: {
+                //this.sweetTooth.getQuestEntityWeapon(null, this.sweetTooth.getPlayer()).setDamage(this.power);
+                break;
+            }
+            case TokenType.STRENGTH: {
+                this.sweetTooth.getQuestEntityWeapon(null).setDamage(this.power,true);
+                break;
+            }
+            default: {
+                break;
+            }
+        }*/
+    }
+    Token.prototype.update = function (player, quest) {
+        switch (this.tokenType) {
+            case TokenType.REGEN: {
+                player.heal(1);
+                break;
+            }
+            case TokenType.FIRE: {
+                this.currentTimer += 1;
+                // If the timer is ready
+                if (this.currentTimer >= this.maxTimer) {
+                    // Cast the fireball
+                    this.castFireball(player, quest);
+                    // Reset the timer
+                    this.currentTimer = 0;
+                }
+                break;
+            }
+            case TokenType.PURPLE: {
+                if (this.currentTimer < this.maxTimer)
+                    this.currentTimer += 1;
+                else {
+                    this.currentTimer = 0;
+                    var ent = this.getRandomEnemy(player, quest);
+                    if (ent != null)
+                        this.castPurpleBall(player, quest, ent);
+                }
+            }
+            case TokenType.NONE: {
+                break;
+            }
+        }
+    };
+    //public getters
+    Token.prototype.getType = function () {
+        return this.tokenType;
+    };
+    Token.prototype.getPower = function () {
+        return this.power;
+    };
+    //literally stolen from RedEnchantedGloves
+    Token.prototype.castFireball = function (player, quest) {
+        // Create the fireball
+        var fireball = new Fireball(quest, player.getSpellCastingPosition(), new Naming("A small fireball", "a small fireball"), new Color(ColorType.RED_ENCHANTED_GLOVES_FIREBALL), new Pos(2, 1), 15, player.getAndPossiblyCreateSpellCastingDamageReason(new Naming("A small fireball", "a small fireball")));
+        // Set the direction
+        fireball.setTargetTypeNoTarget(Algo.getRandomNotImmobileDirectionUpToThisSpeed(1).multiply(new Pos(2, 2)));
+        // Add the entity
+        quest.addEntity(fireball);
+    };
+    // MORE STOLEN METHODS FROM MonkeyWizardStaffMotherClass
+    Token.prototype.castPurpleBall = function (player, quest, target, speed) {
+        if (speed === void 0) { speed = new Pos(2, 1); }
+        var ball = new Fireball(quest, player.getSpellCastingPosition(), new Naming("An magical purple ball", "a magical purple ball"), new Color(ColorType.MONKEY_WIZARD_BALL), new Pos(2, 1), 15, player.getAndPossiblyCreateSpellCastingDamageReason(new Naming("An magical purple ball", "a magical purple ball")));
+        // Set the target
+        ball.setTargetTypeTargetEntity(target, null, speed);
+        // Add it to the quest
+        quest.addEntity(ball);
+    };
+    Token.prototype.getRandomEnemy = function (player, quest) {
+        // Array which will contain the indices (in the entities array) of all possible enemies
+        var indices = [];
+        // Fill the indices array
+        for (var i = 0; i < quest.getEntities().length; i++) {
+            // If this entity is destructible and is from a different team then the player
+            if (quest.getEntities()[i].getDestructible() && quest.getEntities()[i].getTeam() != player.getTeam()) {
+                // We add its index
+                indices.push(i);
+            }
+        }
+        // We return a random entity from the indices index
+        if (indices.length > 0)
+            return quest.getEntities()[indices[Random.between(0, indices.length - 1)]];
+        else
+            return null;
+    };
+    return Token;
+}(Item));
+var TokenType;
+(function (TokenType) {
+    TokenType[TokenType["STRENGTH"] = 0] = "STRENGTH";
+    TokenType[TokenType["SPEED"] = 1] = "SPEED";
+    TokenType[TokenType["REGEN"] = 2] = "REGEN";
+    TokenType[TokenType["FIRE"] = 3] = "FIRE";
+    TokenType[TokenType["PURPLE"] = 4] = "PURPLE";
+    TokenType[TokenType["NONE"] = 5] = "NONE";
+})(TokenType || (TokenType = {}));
 ///<reference path="Place.ts"/>
 var Treasure = /** @class */ (function (_super) {
     __extends(Treasure, _super);
@@ -21713,6 +21852,30 @@ Database.addAscii("eqItems/weapons/summoningTribalSpear", 26, 29, [
     "        ||",
     "       ([])"
 ]);
+Database.addAscii("eqItems/weapons/sweetTooth", 14, 22, [
+    "      ^",
+    "	 /|\\",
+    "    //|\\\\",
+    "   // | \\\\",
+    "  //  |  \\\\",
+    " //   |   ||",
+    " \\\\  :*:  ||",
+    " //   |   ||",
+    "//    |   ||",
+    "\\\\   :*:  ||",
+    " \\\\   |   ||",
+    " //   |   ||",
+    "//   :*:  ||",
+    "\\\\    |   ||",
+    " \\\\___|___//",
+    "  \\\\_____//",
+    " [____v____]",
+    "     [X]",
+    "     [X]",
+    "     [X]",
+    "     [X]",
+    "     [X]"
+]);
 Database.addAscii("eqItems/weapons/tribalSpear", 16, 27, [
     "    /\\",
     "   //\\\\",
@@ -22362,6 +22525,14 @@ Database.addAscii("gridItems/timeRing", 11, 9, [
     "((       ))",
     " \\\\     //",
     "  '-._.-'"
+]);
+Database.addAscii("gridItems/token", 11, 6, [
+    "   _____",
+    "  /     \\",
+    " /       \\",
+    "|  TOKEN  |",
+    " \\       /",
+    "  \\_____/"
 ]);
 Database.addAscii("gridItems/unicornHorn", 7, 4, [
     "\\.",
@@ -27207,6 +27378,8 @@ Database.addText("en.talkingCandySpeech1", "Hey! I'm the talking candy. Congratu
 Database.addText("en.talkingCandySpeech2", "Done! You can now enter it. I hope you liked the game :)");
 Database.addText("en.talkingCandyButton", "Yes!!");
 Database.addText("en.lighthousePuzzleResetButton", "Reset");
+Database.addText("en.eqItemWeaponSweetToothName", "The Legendary Sweet Tooth");
+Database.addText("en.eqItemWeaponSweetToothDescription", "The Legendary Sword that only those of the sweetest hearts can obtain!");
 Database.addText("es.mapVillageComment", "El Pueblo");
 Database.addText("es.mapFortressComment", "La Fortaleza del desierto");
 Database.addText("es.mapATreeComment", "Un árbol");
