@@ -30,6 +30,7 @@ class QuestEntityWeaponDelay{
             delay = this.maxDelay;
         
         // Return the text depending on this delay
+        //TODO:FIX FEEDBACK BASED ON INTERGERS
         switch(delay){
             case 0: return "incredibly fast";
             case 1: return "very fast"; 
@@ -40,7 +41,7 @@ class QuestEntityWeaponDelay{
             case 6: case 7: return "slow";
             case 8: case 9: return "very slow"; 
             case 10: case 11: case 12: case 13: case 14: return "incredibly slow";
-            default: "couldn't be slower"; 
+            default: return "couldn't be slower"; 
         }
     }
     

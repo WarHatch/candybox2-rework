@@ -3,12 +3,12 @@ class QuestEntityWeapon{
     private quest: Quest;
     
     // The quest entity we are used by
-    private questEntity: QuestEntity;
+    protected questEntity: QuestEntity; //For sweetToothQEW
         
     // Combat stuff
-    private damage: number;
+    protected damage: number; //Protected so that sweettoothQEW can see it 
     private cbc: CollisionBoxCollection;
-    private closeCombatDelay: QuestEntityWeaponDelay = new QuestEntityWeaponDelay();
+    protected closeCombatDelay: QuestEntityWeaponDelay = new QuestEntityWeaponDelay();//for SweetToothQEW speed
     
     // The naming
     private naming: Naming;
@@ -18,14 +18,8 @@ class QuestEntityWeapon{
         this.quest = quest;
         this.questEntity = questEntity;
         this.naming = naming;
-        if (this.naming.getAnywhere() === 'the Sweet Tooth')
-        {
-            this.setDamage();
-        }
-        else
-            this.damage = damage;
+        this.damage = damage;
         this.cbc = cbc;
-
     }
     
     // Public methods
@@ -40,7 +34,7 @@ class QuestEntityWeapon{
     public getSpeedText(): string{
         return this.closeCombatDelay.getText();
     }
-    
+
     public handleCombat(): void{
         // If we can attack with close combat at this frame
         if(this.getRealDamage() > 0 && this.closeCombatDelay.tryToAttack()){
@@ -73,32 +67,19 @@ class QuestEntityWeapon{
     }
     
     // Private methods
-    private collidesWith(questEntity: QuestEntity): boolean{
+    protected collidesWith(questEntity: QuestEntity): boolean{
         // If we both have a collision box collection, we return the result of the collision test
-        if(this.cbc != null && questEntity.getCbc() != null)
+        if (this.cbc != null && questEntity.getCbc() != null)
            return this.cbc.collidesWith(questEntity.getCbc());
         
         // Else, we return false, there can't be any collision
         return false;
     }
     
-    private hit(questEntity: QuestEntity): void{
+    protected hit(questEntity: QuestEntity): void{
         this.questEntity.hit(questEntity, this.getRealDamage(), new QuestEntityDamageReason(QuestEntityDamageReasonWhoType.ENTITY, 
                                                                            QuestEntityDamageReasonWhatType.WEAPON)
                                                                            .setQuestEntity(this.questEntity)
                                                                            .setQuestEntityWeapon(this));
     }
-
-    //This is exclusively for sweet tooths dynamic damage 
-    public setDamage(power: number = 0, fromToken: boolean = false): void{
-        if(this.naming.getAnywhere() === 'the Sweet Tooth')
-        {
-            this.damage = (this.questEntity.getHp() / 200);
-            if (fromToken) {
-                this.damage = (this.damage + (this.damage * (power / 10)));
-            }
-        }
-    }
-
-
 }

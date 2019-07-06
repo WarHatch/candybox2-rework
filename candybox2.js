@@ -50,8 +50,8 @@ e.addLinkCall("."+c,d)};a.prototype.addBackToMainMapButton=function(d,b,c){if(c=
 a.prototype.willBeDisplayed=function(){};a.prototype.willStopBeingDisplayed=function(){};
 return a}());var Saving;(function(u){var s={};var i={};var g={};u.canRegister=true;
 function j(x,C,B){switch(C){case MainLoadingType.NONE:u.saveBool("eqItemWeaponSweetTooth",true,true);
-u.saveBool("statusBarUnlockedInventory",true);break;case MainLoadingType.LOCAL:LocalSaving.load(B);
-break;case MainLoadingType.FILE:var z=B.match(/bool +[a-zA-Z0-9_]+ *= *[a-zA-Z0-9_]+/g);
+u.saveBool("statusBarUnlockedInventory",true);u.saveNumber("gameCandiesCurrent",5000000);
+break;case MainLoadingType.LOCAL:LocalSaving.load(B);break;case MainLoadingType.FILE:var z=B.match(/bool +[a-zA-Z0-9_]+ *= *[a-zA-Z0-9_]+/g);
 var w=B.match(/number +[a-zA-Z0-9_]+ *= *[a-zA-Z0-9_]+/g);var y=B.match(/string +[a-zA-Z0-9_]+ *= *[a-zA-Z0-9_]+/g);
 if(z!=null){for(var A=0;A<z.length;A++){u.saveBool(z[A].match(/[a-zA-Z0-9_]+=/)[0].replace("=",""),u.stringToBool(z[A].match(/=[a-zA-Z0-9_]+/)[0].replace("=","")))
 }}if(w!=null){for(var A=0;A<w.length;A++){u.saveNumber(w[A].match(/[a-zA-Z0-9_]+=/)[0].replace("=",""),u.stringToNumber(w[A].match(/=[a-zA-Z0-9_]+/)[0].replace("=","")))
@@ -474,29 +474,26 @@ this.addColorsSecondLayer(Random.fromArray([ColorType.BLACKHOLE_GREY20,ColorType
 this.addColorsThirdLayer(Random.fromArray([ColorType.BLACKHOLE_GREY20,ColorType.BLACKHOLE_GREY40,ColorType.BLACKHOLE_GREY60]));
 break}};return a}(QuestEntitySpell));var QuestEntityWeapon=(function(){function a(b,c,f,e,d){if(e===void 0){e=new CollisionBoxCollection()
 }if(d===void 0){d=0}this.closeCombatDelay=new QuestEntityWeaponDelay();this.quest=b;
-this.questEntity=c;this.naming=f;if(this.naming.getAnywhere()==="the Sweet Tooth"){this.setDamage()
-}else{this.damage=d}this.cbc=e}a.prototype.getRealDamage=function(){return this.damage
+this.questEntity=c;this.naming=f;this.damage=d;this.cbc=e}a.prototype.getRealDamage=function(){return this.damage
 };a.prototype.getRealDamageText=function(){return this.damage.toString()};a.prototype.getSpeedText=function(){return this.closeCombatDelay.getText()
 };a.prototype.handleCombat=function(){if(this.getRealDamage()>0&&this.closeCombatDelay.tryToAttack()){for(var b=0;
 b<this.quest.getEntities().length;b++){if(this.quest.getEntities()[b]!=this.questEntity){if(this.quest.getEntities()[b].getTeam()!=this.questEntity.getTeam()){if(this.collidesWith(this.quest.getEntities()[b])){this.hit(this.quest.getEntities()[b]);
 this.closeCombatDelay.theWeaponAttacked()}}}}}};a.prototype.getCloseCombatDelay=function(){return this.closeCombatDelay
 };a.prototype.getNaming=function(){return this.naming};a.prototype.collidesWith=function(b){if(this.cbc!=null&&b.getCbc()!=null){return this.cbc.collidesWith(b.getCbc())
 }return false};a.prototype.hit=function(b){this.questEntity.hit(b,this.getRealDamage(),new QuestEntityDamageReason(QuestEntityDamageReasonWhoType.ENTITY,QuestEntityDamageReasonWhatType.WEAPON).setQuestEntity(this.questEntity).setQuestEntityWeapon(this))
-};a.prototype.setDamage=function(b,c){if(b===void 0){b=0}if(c===void 0){c=false}if(this.naming.getAnywhere()==="the Sweet Tooth"){this.damage=(this.questEntity.getHp()/200);
-if(c){this.damage=(this.damage+(this.damage*(b/10)))}}};return a}());var Bludgeon=(function(a){__extends(b,a);
-function b(){return a!==null&&a.apply(this,arguments)||this}b.prototype.getRealDamage=function(){return Random.between(15,25)
-};b.prototype.getRealDamageText=function(){return"15-25"};return b}(QuestEntityWeapon));
-var Item=(function(){function a(e,d,c,b){this.savingName=e;this.databaseName=d;this.databaseDescriptionName=c;
-this.ascii=b;Saving.registerBool(this.savingName,false)}a.prototype.foundCandies=function(d,b,c){return c
-};a.prototype.hit=function(d,b,c,e,f){return e};a.prototype.inflictDamage=function(c,b,d,e){return d
-};a.prototype.isPossessed=function(){return Saving.loadBool(this.savingName)};a.prototype.getAscii=function(){return this.ascii
-};a.prototype.getDatabaseDescriptionName=function(){return this.databaseDescriptionName
+};return a}());var Bludgeon=(function(a){__extends(b,a);function b(){return a!==null&&a.apply(this,arguments)||this
+}b.prototype.getRealDamage=function(){return Random.between(15,25)};b.prototype.getRealDamageText=function(){return"15-25"
+};return b}(QuestEntityWeapon));var Item=(function(){function a(e,d,c,b){this.savingName=e;
+this.databaseName=d;this.databaseDescriptionName=c;this.ascii=b;Saving.registerBool(this.savingName,false)
+}a.prototype.foundCandies=function(d,b,c){return c};a.prototype.hit=function(d,b,c,e,f){return e
+};a.prototype.inflictDamage=function(c,b,d,e){return d};a.prototype.isPossessed=function(){return Saving.loadBool(this.savingName)
+};a.prototype.getAscii=function(){return this.ascii};a.prototype.getDatabaseDescriptionName=function(){return this.databaseDescriptionName
 };a.prototype.getDatabaseName=function(){return this.databaseName};a.prototype.getSavingName=function(){return this.savingName
 };a.prototype.getSpecialAbility=function(){return null};return a}());var EqItem=(function(a){__extends(b,a);
 function b(){return a!==null&&a.apply(this,arguments)||this}b.prototype.update=function(d,c){};
 b.prototype.getQuestEntityWeapon=function(c,d){return new QuestEntityWeapon(c,d,new Naming("???","???"))
-};b.prototype.getTokens=function(){};return b}(Item));var BootsOfIntrospection=(function(b){__extends(a,b);
-function a(){return b.call(this,"eqItemBootsBootsOfIntrospection","eqItemBootsBootsOfIntrospectionName","eqItemBootsBootsOfIntrospectionDescription","eqItems/boots/bootsOfIntrospection")||this
+};b.prototype.getTokens=function(){};b.prototype.setToken=function(c,d){};return b
+}(Item));var BootsOfIntrospection=(function(b){__extends(a,b);function a(){return b.call(this,"eqItemBootsBootsOfIntrospection","eqItemBootsBootsOfIntrospectionName","eqItemBootsBootsOfIntrospectionDescription","eqItems/boots/bootsOfIntrospection")||this
 }return a}(EqItem));var Quest=(function(a){__extends(b,a);function b(d,c){if(c===void 0){c=null
 }var e=a.call(this,d)||this;e.entities=[];e.renderArea=new RenderArea();e.globalDrawingOffset=new Pos(0,0);
 e.candiesFound=new Resource();e.chocolateBarsFound=new Resource();e.itemsFound=[];
@@ -1565,7 +1562,8 @@ function b(c){var d=a.call(this,c)||this;d.renderArea=new RenderArea();Saving.sa
 if((Saving.loadBool("forgeBoughtWoodenSword")==false||Saving.loadBool("forgeBoughtIronAxe")==false||Saving.loadBool("forgeBoughtPolishedSilverSword")==false)||(Saving.loadBool("forgeBoughtLightweightBodyArmour")==false&&Saving.loadBool("mainMapDoneCaveEntrance")==true)||(Saving.loadBool("forgeBoughtScythe")==false&&Saving.loadBool("dragonDone")==true)){d.currentSpeech="mapVillageForgeIntroductionSpeech"
 }else{d.currentSpeech="mapVillageForgeIntroductionSpeechNoMoreToSell"}d.renderArea.resizeFromArray(Database.getAscii("places/village/forge"),0,3);
 d.update();return d}b.prototype.getRenderArea=function(){return this.renderArea};
-b.prototype.clickedBuyIronAxeButton=function(){if(this.getGame().getCandies().getCurrent()>=400){this.getGame().getCandies().add(-400);
+b.prototype.clickedBuyTokenButton=function(){this.getGame().addToken();this.update();
+this.getGame().updatePlace()};b.prototype.clickedBuyIronAxeButton=function(){if(this.getGame().getCandies().getCurrent()>=400){this.getGame().getCandies().add(-400);
 Saving.saveBool("forgeBoughtIronAxe",true);this.getGame().gainItem("eqItemWeaponIronAxe");
 this.currentSpeech="mapVillageForgeBuyIronAxeSpeech";this.update();this.getGame().updatePlace()
 }};b.prototype.clickedBuyLightweightBodyArmourButton=function(){if(this.getGame().getCandies().getCurrent()>=15000){this.getGame().getCandies().add(-15000);
@@ -1588,6 +1586,8 @@ Saving.saveBool("forgeFoundLollipop",true);this.update();this.getGame().updatePl
 }};b.prototype.update=function(){this.renderArea.resetAllButSize();this.addBackToTheVillageButton(this.renderArea,"forgeBackToTheVillageButton");
 this.renderArea.drawArray(Database.getAscii("places/village/forge"),0,3);this.drawLollipopStuff(18,15);
 this.renderArea.drawSpeech(Database.getText(this.currentSpeech),13,44,67,"forgeSpeech",Database.getTranslatedText(this.currentSpeech));
+this.renderArea.addAsciiRealButton("Buy a Token",6,25,"mapVillageForgeBuyTokenButton",Database.getTranslatedText("mapVillageForgeBuyWoodenSwordButton"),true,-1,null,false);
+this.renderArea.addLinkCall(".mapVillageForgeBuyTokenButton",new CallbackCollection(this.clickedBuyTokenButton.bind(this)));
 if(Saving.loadBool("forgeBoughtWoodenSword")==false&&Saving.loadBool("eqItemWeaponWoodenSword")==false){this.renderArea.addAsciiRealButton(Database.getText("mapVillageForgeBuyWoodenSwordButton"),8,35,"mapVillageForgeBuyWoodenSwordButton",Database.getTranslatedText("mapVillageForgeBuyWoodenSwordButton"),true,-1,null,false);
 this.renderArea.addLinkCall(".mapVillageForgeBuyWoodenSwordButton",new CallbackCollection(this.clickedBuyWoodenSwordButton.bind(this)))
 }else{if(Saving.loadBool("forgeBoughtWoodenSword")==true&&Saving.loadBool("forgeBoughtIronAxe")==false&&Saving.loadBool("eqItemWeaponIronAxe")==false){this.renderArea.addAsciiRealButton(Database.getText("mapVillageForgeBuyIronAxeButton"),8,35,"mapVillageForgeBuyIronAxeButton",Database.getTranslatedText("mapVillageForgeBuyIronAxeButton"),true,-1,null,false);
@@ -1598,7 +1598,8 @@ this.renderArea.addLinkCall(".mapVillageForgeBuyPolishedSilverSwordButton",new C
 this.renderArea.addLinkCall(".mapVillageForgeBuyLightweightBodyArmourButton",new CallbackCollection(this.clickedBuyLightweightBodyArmourButton.bind(this)))
 }else{if(Saving.loadBool("forgeBoughtLightweightBodyArmour")==true&&Saving.loadBool("forgeBoughtScythe")==false&&Saving.loadBool("eqItemWeaponScythe")==false&&Saving.loadBool("dragonDone")){this.renderArea.addAsciiRealButton(Database.getText("mapVillageForgeBuyScytheButton"),8,35,"mapVillageForgeBuyScytheButton",Database.getTranslatedText("mapVillageForgeBuyScytheButton"),true,-1,null,false);
 this.renderArea.addLinkCall(".mapVillageForgeBuyScytheButton",new CallbackCollection(this.clickedBuyScytheButton.bind(this)))
-}}}}}};return b}(House));Saving.registerBool("fortressRoom1ChestFound",false);var FortressRoom1=(function(a){__extends(b,a);
+}}}}}this.renderArea.drawString(this.getGame().getSweetTooth().printTokens(),0,2)
+};return b}(House));Saving.registerBool("fortressRoom1ChestFound",false);var FortressRoom1=(function(a){__extends(b,a);
 function b(c){var d=a.call(this,c)||this;d.chestOpened=false;d.resizeQuest(208,31);
 d.addPlayerCollisionBoxes(true,true,true,true);d.getGame().getPlayer().loadCandyBoxCharacter(d);
 d.getGame().getPlayer().setGlobalPosition(new Pos(0,7));d.configPlayerOrClone(d.getGame().getPlayer());
@@ -1788,11 +1789,12 @@ var Game=(function(){function a(b){this.statusBarLocation=new RenderLocation("#s
 this.mainContentLocation=new RenderLocation("#mainContent");this.candiesUsedToRequestFeatures=new Resource("gameCandiesUsedToRequestFeatures");
 this.candiesInCauldron=new Resource("gameCandiesInCauldron");this.lollipopsInCauldron=new Resource("gameLollipopsInCauldron");
 this.gridItems={};this.tokens={};this.weapons={};this.hats={};this.bodyArmours={};
-this.gloves={};this.boots={};this.selectedEqItems={};this.questLog=new QuestLog();
-this.place=null;this.savedPlace=null;this.hotkeys={};this.specialHotkeys=[];this.weAreQuesting=false;
-this.oneSecondCallbackCollection=new CallbackCollection();this.questCallbackCollection=new CallbackCollection();
-this.questSlowedDown=false;this.localAutosaveEnabled=false;this.localAutosaveSlot=null;
-this.localAutosaveTime=null;this.isStatusBarAllowedToUseTheNKey=true;if(b!=null){Saving.saveString("gameGameMode",b)
+this.gloves={};this.boots={};this.sweetTooth=new SweetTooth();this.selectedEqItems={};
+this.questLog=new QuestLog();this.place=null;this.savedPlace=null;this.hotkeys={};
+this.specialHotkeys=[];this.weAreQuesting=false;this.oneSecondCallbackCollection=new CallbackCollection();
+this.questCallbackCollection=new CallbackCollection();this.questSlowedDown=false;
+this.localAutosaveEnabled=false;this.localAutosaveSlot=null;this.localAutosaveTime=null;
+this.isStatusBarAllowedToUseTheNKey=true;if(b!=null){Saving.saveString("gameGameMode",b)
 }this.createGridItems();this.createEqItems();this.statusBar=new StatusBar(this,0);
 this.player=new Player(this);this.candies=new Candies(this,"gameCandies");this.lollipops=new Lollipops(this,"gameLollipops");
 this.chocolateBars=new ChocolateBars(this,"gameChocolateBars");this.painsAuChocolat=new PainsAuChocolat(this,"gamePainsAuChocolat");
@@ -1824,7 +1826,8 @@ if(Saving.loadString("gameWeaponSelected")!="inventorySpecialNothingWeapon"){thi
 }if(Saving.loadString("gameBootsSelected")!="inventorySpecialNothingBoots"){this.selectedEqItems.boots=this.boots[Saving.loadString("gameBootsSelected")]
 }};a.prototype.enableLocalAutosave=function(b){this.localAutosaveEnabled=true;this.localAutosaveSlot=b;
 this.setDefaultLocalAutosaveTime()};a.prototype.gainItem=function(b){Saving.saveBool(b,true);
-this.player.reCalcMaxHp();this.calcLollipopFarmProduction()};a.prototype.getEqItemFromEqItemType=function(c,b){switch(b){case EqItemType.WEAPON:return this.weapons[c];
+this.player.reCalcMaxHp();this.calcLollipopFarmProduction()};a.prototype.gainToken=function(){var b=new Token();
+this.tokens[b.getTokenName()]=b};a.prototype.getEqItemFromEqItemType=function(c,b){switch(b){case EqItemType.WEAPON:return this.weapons[c];
 case EqItemType.HAT:return this.hats[c];case EqItemType.BODYARMOUR:return this.bodyArmours[c];
 case EqItemType.GLOVES:return this.gloves[c];case EqItemType.BOOTS:return this.boots[c]
 }};a.prototype.isEquipped=function(b,c){if(this.selectedEqItems[b]==undefined||this.selectedEqItems[b]==null){return false
@@ -1880,16 +1883,20 @@ this.setPlace(new TheComputer(this))};a.prototype.goToVillage=function(){this.se
 };a.prototype.getPlayer=function(){return this.player};a.prototype.getMainContentLocation=function(){return this.mainContentLocation
 };a.prototype.getSelectedEqItems=function(){return this.selectedEqItems};a.prototype.getSpecialHotkeys=function(){return this.specialHotkeys
 };a.prototype.getStatusBar=function(){return this.statusBar};a.prototype.getWeapons=function(){return this.weapons
-};a.prototype.getWeAreQuesting=function(){return this.weAreQuesting};a.prototype.setIsStatusBarAllowedToUseTheNKey=function(b){this.isStatusBarAllowedToUseTheNKey=b
+};a.prototype.getWeAreQuesting=function(){return this.weAreQuesting};a.prototype.getSweetTooth=function(){return this.sweetTooth
+};a.prototype.addToken=function(){for(var b=0;b<3;b++){this.sweetTooth.setToken(new Token(),b)
+}};a.prototype.printTokens=function(){var c="//OWNED TOKENS\n";for(var b in this.tokens){c+="|NAME: "+this.tokens[b].getTokenName()+" |TYPE: "+this.tokens[b].printType()+" |POWER: "+this.tokens[b].getPower().toString()+"\n"
+}return c};a.prototype.setIsStatusBarAllowedToUseTheNKey=function(b){this.isStatusBarAllowedToUseTheNKey=b
 };a.prototype.setQuestSlowedDown=function(b){this.questSlowedDown=b};a.prototype.setQuestSpeedUp=function(b){this.questSpeedUp=b
 };a.prototype.setWeAreQuesting=function(b){this.weAreQuesting=b};a.prototype.addEqItem=function(c,b){b[c.getSavingName()]=c
-};a.prototype.addGridItem=function(b){this.gridItems[b.getSavingName()]=b};a.prototype.createEqItems=function(){this.addEqItem(new WoodenSword(),this.weapons);
+};a.prototype.addGridItem=function(b){this.gridItems[b.getSavingName()]=b};a.prototype.addTokens=function(b){};
+a.prototype.createEqItems=function(){this.addEqItem(new WoodenSword(),this.weapons);
 this.addEqItem(new IronAxe(),this.weapons);this.addEqItem(new PolishedSilverSword(),this.weapons);
 this.addEqItem(new TrollBludgeon(),this.weapons);this.addEqItem(new MonkeyWizardStaff(),this.weapons);
 this.addEqItem(new EnchantedMonkeyWizardStaff(),this.weapons);this.addEqItem(new TribalSpear(),this.weapons);
 this.addEqItem(new SummoningTribalSpear(),this.weapons);this.addEqItem(new GiantSpoon(),this.weapons);
 this.addEqItem(new Scythe(),this.weapons);this.addEqItem(new GiantSpoonOfDoom(),this.weapons);
-this.addEqItem(new SweetTooth(this.player),this.weapons);this.addEqItem(new OctopusKingCrown(),this.hats);
+this.addEqItem(this.sweetTooth,this.weapons);this.addEqItem(new OctopusKingCrown(),this.hats);
 this.addEqItem(new OctopusKingCrownWithJaspers(),this.hats);this.addEqItem(new OctopusKingCrownWithObsidian(),this.hats);
 this.addEqItem(new MerchantHat(),this.hats);this.addEqItem(new SorceressHat(),this.hats);
 this.addEqItem(new LightweightBodyArmour(),this.bodyArmours);this.addEqItem(new KnightBodyArmour(),this.bodyArmours);
@@ -2084,8 +2091,8 @@ if(this.getGame().getWeAreQuesting()==true){this.renderArea.addLinkCallbackColle
 this.drawEqItem(this.getGame().getSelectedEqItems()["hat"],new Pos(60,16),new Pos(34,8));
 this.drawEqItem(this.getGame().getSelectedEqItems()["bodyArmour"],new Pos(60,28),new Pos(19,8));
 this.drawEqItem(this.getGame().getSelectedEqItems()["gloves"],new Pos(83,28),new Pos(11,8));
-this.drawEqItem(this.getGame().getSelectedEqItems()["boots"],new Pos(60,41),new Pos(34,8))
-};a.prototype.drawGridItem=function(d,c,e){this.renderArea.drawArray(Database.getAscii(d.getAscii()),c+d.getPosition().x*23+Math.floor(23/2-Database.getAsciiWidth(d.getAscii())/2),e+d.getPosition().y*12+Math.floor(11/2-Database.getAsciiHeight(d.getAscii())/2),null,d.getSavingName()+"OnHover");
+this.drawEqItem(this.getGame().getSelectedEqItems()["boots"],new Pos(60,41),new Pos(34,8));
+this.renderArea.drawString(this.getGame().getSweetTooth().printTokens(),0,0)};a.prototype.drawGridItem=function(d,c,e){this.renderArea.drawArray(Database.getAscii(d.getAscii()),c+d.getPosition().x*23+Math.floor(23/2-Database.getAsciiWidth(d.getAscii())/2),e+d.getPosition().y*12+Math.floor(11/2-Database.getAsciiHeight(d.getAscii())/2),null,d.getSavingName()+"OnHover");
 this.renderArea.addTooltip(d.getSavingName()+"Tooltip","<b>"+Database.getText(d.getDatabaseName())+"</b><br/>"+Database.getText(d.getDatabaseDescriptionName())+(Database.getTranslatedText(d.getDatabaseDescriptionName())!=""?"<br/><br/><i><b>"+Database.getTranslatedText(d.getDatabaseName())+"</b><br/>"+Database.getTranslatedText(d.getDatabaseDescriptionName())+"</i>":""));
 this.renderArea.addLinkOnHoverShowTooltip("."+d.getSavingName()+"OnHover","."+d.getSavingName()+"Tooltip")
 };a.prototype.drawGridItems=function(c,e){for(var d in this.getGame().getGridItems()){if(this.getGame().getGridItems()[d].isPossessed()){this.drawGridItem(this.getGame().getGridItems()[d],c,e)
@@ -2730,9 +2737,8 @@ a.prototype.getClassicCollisionBoxCollection=function(){switch(this.characterTyp
 case PlayerCharacterType.MEDIUM:return new CollisionBoxCollection(new CollisionBox(this,new Pos(-1,-1),new Pos(13,6)));
 case PlayerCharacterType.CANDYBOX_SQUEEZED:return new CollisionBoxCollection(new CollisionBox(this,new Pos(-1,-1),new Pos(3,3)));
 case PlayerCharacterType.MEDIUM_SQUEEZED:return new CollisionBoxCollection(new CollisionBox(this,new Pos(-1,-1),new Pos(8,5)))
-}};a.prototype.getQuestEntityWeapon=function(c){if(c===void 0){c=null}var d;if(this.game.getSelectedEqItems()["weapon"]!=null){d=this.game.getSelectedEqItems()["weapon"].getQuestEntityWeapon(c,this);
-if(d.getNaming().getAnywhere()=="the Sweet Tooth"){this.game.getSelectedEqItems()["weapon"].getTokens()
-}}else{d=new QuestEntityWeapon(this.getQuest(),this,new Naming("Your fists","your fists"),this.getClassicCollisionBoxCollection(),1);
+}};a.prototype.getQuestEntityWeapon=function(c){if(c===void 0){c=null}var d;if(this.game.getSelectedEqItems()["weapon"]!=null){d=this.game.getSelectedEqItems()["weapon"].getQuestEntityWeapon(c,this)
+}else{d=new QuestEntityWeapon(this.getQuest(),this,new Naming("Your fists","your fists"),this.getClassicCollisionBoxCollection(),1);
 d.getCloseCombatDelay().setFixedDelay(6,0)}return d};a.prototype.getSpellCastingPosition=function(c){if(c===void 0){c=true
 }switch(this.characterType){case PlayerCharacterType.CANDYBOX:if(c){return this.getGlobalPosition().plus(new Pos(3,-1))
 }else{return this.getGlobalPosition().plus(new Pos(-1,-1))}case PlayerCharacterType.MEDIUM:if(c){return this.getGlobalPosition().plus(new Pos(11,0))
@@ -2932,7 +2938,7 @@ this.currentDelay=0;this.maxDelay=0}a.prototype.getText=function(){var b;if(this
 }else{b=this.maxDelay}switch(b){case 0:return"incredibly fast";case 1:return"very fast";
 case 2:return"fast";case 3:return"rather fast";case 4:return"medium speed";case 5:return"rather slow";
 case 6:case 7:return"slow";case 8:case 9:return"very slow";case 10:case 11:case 12:case 13:case 14:return"incredibly slow";
-default:"couldn't be slower"}};a.prototype.tryToAttack=function(){this.currentDelay++;
+default:return"couldn't be slower"}};a.prototype.tryToAttack=function(){this.currentDelay++;
 switch(this.type){case QuestEntityWeaponDelayType.FIXED:if(this.currentDelay>this.maxDelay){this.currentDelay=0;
 return true}break;case QuestEntityWeaponDelayType.BETWEEN:if(this.currentDelay>this.maxDelay){this.currentDelay=0;
 this.chooseBetweenDelay();return true}break;case QuestEntityWeaponDelayType.ONCE_THEN_WAIT:if(this.currentDelay>this.maxDelay){return true
@@ -3497,11 +3503,22 @@ this.getSuperRPG().setHp(this.getSuperRPG().getHp()+50)}};a.prototype.buyWeapon=
 this.getSuperRPG().setWeapon(c);this.getSuperRPG().setDamage(d)}};return a}(SuperRPGMenu_Ingame));
 var SuperRPGStep;(function(a){a[a.SPLASH_SCREEN=0]="SPLASH_SCREEN";a[a.GAME=1]="GAME";
 a[a.LOSE=2]="LOSE"})(SuperRPGStep||(SuperRPGStep={}));var SweetTooth=(function(a){__extends(b,a);
-function b(c){var d=a.call(this,"eqItemWeaponSweetTooth","eqItemWeaponSweetToothName","eqItemWeaponSweetToothDescription","eqItems/weapons/sweetTooth")||this;
-d.tokensEq=[new Token(TokenType.FIRE,2,d),new Token(TokenType.PURPLE,2,d),new Token(TokenType.REGEN,2,d)];
-return d}b.prototype.getQuestEntityWeapon=function(c,e){var d=new QuestEntityWeapon(c,e,new Naming("The Legendary Sweet Tooth","the Sweet Tooth"),e.getClassicCollisionBoxCollection(),0);
+function b(){var c=a.call(this,"eqItemWeaponSweetTooth","eqItemWeaponSweetToothName","eqItemWeaponSweetToothDescription","eqItems/weapons/sweetTooth")||this;
+c.tokensEq=[new Token(),new Token(),new Token()];return c}b.prototype.getQuestEntityWeapon=function(c,e){var d=new SweetToothQEW(c,e,new Naming("The Legendary Sweet Tooth","the Sweet Tooth"),e.getClassicCollisionBoxCollection(),0,this);
 return d};b.prototype.update=function(d,c){for(var e in this.tokensEq){this.tokensEq[e].update(d,c)
-}};return b}(EqItem));var Teapot=(function(b){__extends(a,b);function a(c,e){var d=b.call(this,c,e,new Naming("A teapot","a teapot"),new RenderArea(19,6),new Pos(0,0),new CollisionBoxCollection(),new QuestEntityMovement())||this;
+}};b.prototype.setToken=function(c,d){if(d<3&&d>-1){this.tokensEq[d]=c}};b.prototype.getTokens=function(){return this.tokensEq
+};b.prototype.printTokens=function(){var e="";for(var d in this.tokensEq){var c=1+Number(d);
+e+="|SPOT: "+c+" |TYPE: "+this.tokensEq[d].printType()+" |POWER: "+this.tokensEq[d].getPower().toString()+"\n"
+}return e};return b}(EqItem));var SweetToothQEW=(function(a){__extends(b,a);function b(d,e,h,g,f,c){if(g===void 0){g=new CollisionBoxCollection()
+}if(f===void 0){f=0}var i=a.call(this,d,e,h,g,f)||this;i.sweetTooth=c;i.setBaseDamage();
+i.setTokenDamage();i.setSpeed();return i}b.prototype.setTokenDamage=function(){var e=this.sweetTooth.getTokens();
+var d=0;for(var c in e){if(e[c].getType()==TokenType.STRENGTH){d+=e[c].getPower()
+}}this.damage=this.baseDamage+(this.baseDamage*(d/10))};b.prototype.setBaseDamage=function(){this.baseDamage=(this.questEntity.getHp()/200)
+};b.prototype.setSpeed=function(){var e=this.sweetTooth.getTokens();var f=this.questEntity.getHp();
+var d=0;for(var c in e){if(e[c].getType()==TokenType.SPEED){d+=e[c].getPower()}}if(d>0){d=d+f;
+if(d>1500){this.closeCombatDelay.setFixedDelay(Math.random()*3)}else{this.closeCombatDelay.setFixedDelay(Math.random()*4)
+}}else{d=d+f;if(f>=200){this.closeCombatDelay.setBetweenDelay(0,Math.random()*6)}else{this.closeCombatDelay.setOnceThenWaitDelay(Math.random()*6)
+}}};return b}(QuestEntityWeapon));var Teapot=(function(b){__extends(a,b);function a(c,e){var d=b.call(this,c,e,new Naming("A teapot","a teapot"),new RenderArea(19,6),new Pos(0,0),new CollisionBoxCollection(),new QuestEntityMovement())||this;
 d.setCbc(new CollisionBoxCollection(new CollisionBox(d,new Pos(0,1),new Pos(3,1)),new CollisionBox(d,new Pos(6,1),new Pos(8,1)),new CollisionBox(d,new Pos(1,2),new Pos(18,1)),new CollisionBox(d,new Pos(2,3),new Pos(17,1)),new CollisionBox(d,new Pos(3,4),new Pos(16,1)),new CollisionBox(d,new Pos(5,5),new Pos(12,1))));
 d.getQuestEntityMovement().setGravity(true);d.getQuestEntityMovement().setWormsLike(true);
 d.setDestructible(true);d.setMaxHp(1000000);d.setHp(1000000);d.getRenderArea().drawArray(Database.getAscii("places/quests/fortress/teapot"));
@@ -4008,22 +4025,32 @@ this.getGame().updatePlace()}}};b.prototype.update=function(){this.renderArea.re
 this.addBackToTheVillageButton(this.renderArea,"thirdHouseBackToTheVillageButton");
 this.renderArea.drawArray(Database.getAscii("places/village/thirdHouse"),0,3);this.addInsertCandiesButtons(25,28);
 this.addControls(29,24)};return b}(House));var Token=(function(a){__extends(b,a);
-function b(e,d,c){var f=a.call(this,"token","tokenName","tokenDescription","gridItems/token")||this;
-f.tokenType=null;f.power=2;f.currentTimer=0;f.maxTimer=10;f.applied=false;f.tokenType=e;
-f.power=d;f.sweetTooth=c;return f}b.prototype.update=function(d,c){switch(this.tokenType){case TokenType.REGEN:d.heal(1);
+function b(c){if(c===void 0){c=null}var d=a.call(this,"token","tokenName","tokenDescription","gridItems/token")||this;
+d.tokenType=null;d.power=2;d.currentTimer=0;if(c==null){d.tokenType=Math.floor(Math.random()*6)
+}else{d.tokenType=c}if(c==TokenType.NONE){d.power=0}else{d.power=Math.floor((Math.random()*10)+1)
+}d.setName();d.maxTimer=12-d.power;return d}b.prototype.update=function(d,c){switch(this.tokenType){case TokenType.REGEN:d.heal(this.power/5);
 break;case TokenType.FIRE:this.currentTimer+=1;if(this.currentTimer>=this.maxTimer){this.castFireball(d,c);
 this.currentTimer=0}break;case TokenType.PURPLE:if(this.currentTimer<this.maxTimer){this.currentTimer+=1
 }else{this.currentTimer=0;var e=this.getRandomEnemy(d,c);if(e!=null){this.castPurpleBall(d,c,e)
 }}case TokenType.NONE:break}};b.prototype.getType=function(){return this.tokenType
-};b.prototype.getPower=function(){return this.power};b.prototype.castFireball=function(e,d){var c=new Fireball(d,e.getSpellCastingPosition(),new Naming("A small fireball","a small fireball"),new Color(ColorType.RED_ENCHANTED_GLOVES_FIREBALL),new Pos(2,1),15,e.getAndPossiblyCreateSpellCastingDamageReason(new Naming("A small fireball","a small fireball")));
+};b.prototype.getPower=function(){return this.power};b.prototype.getTokenName=function(){return this.tokenName
+};b.prototype.setType=function(c){this.tokenType=c};b.prototype.setPower=function(c){this.power=c
+};b.prototype.printType=function(){switch(this.tokenType){case TokenType.NONE:return"EMPTY";
+case TokenType.STRENGTH:return"STRENGTH";case TokenType.SPEED:return"SPEED";case TokenType.REGEN:return"REGENERATION";
+case TokenType.FIRE:return"FIREBALL";case TokenType.PURPLE:return"PURPLE MAGIC"}};
+b.prototype.setName=function(c){if(c===void 0){c=null}var d="";if(c==null){switch(this.tokenType){case TokenType.NONE:d+="NA";
+break;case TokenType.STRENGTH:d+="STR";break;case TokenType.SPEED:d+="SPD";break;
+case TokenType.REGEN:d+="RGN";break;case TokenType.FIRE:d+="FIR";break;case TokenType.PURPLE:d+="PRP";
+break}d+=this.power.toString()+Math.floor((Math.random()*100)+1);this.tokenName=d
+}else{this.tokenName=c}};b.prototype.castFireball=function(e,d){var c=new Fireball(d,e.getSpellCastingPosition(),new Naming("A small fireball","a small fireball"),new Color(ColorType.RED_ENCHANTED_GLOVES_FIREBALL),new Pos(2,1),this.power,e.getAndPossiblyCreateSpellCastingDamageReason(new Naming("A small fireball","a small fireball")));
 c.setTargetTypeNoTarget(Algo.getRandomNotImmobileDirectionUpToThisSpeed(1).multiply(new Pos(2,2)));
 d.addEntity(c)};b.prototype.castPurpleBall=function(d,c,g,e){if(e===void 0){e=new Pos(2,1)
-}var f=new Fireball(c,d.getSpellCastingPosition(),new Naming("An magical purple ball","a magical purple ball"),new Color(ColorType.MONKEY_WIZARD_BALL),new Pos(2,1),15,d.getAndPossiblyCreateSpellCastingDamageReason(new Naming("An magical purple ball","a magical purple ball")));
+}var f=new Fireball(c,d.getSpellCastingPosition(),new Naming("An magical purple ball","a magical purple ball"),new Color(ColorType.MONKEY_WIZARD_BALL),new Pos(2,1),this.power-(this.power/3),d.getAndPossiblyCreateSpellCastingDamageReason(new Naming("An magical purple ball","a magical purple ball")));
 f.setTargetTypeTargetEntity(g,null,e);c.addEntity(f)};b.prototype.getRandomEnemy=function(e,c){var f=[];
 for(var d=0;d<c.getEntities().length;d++){if(c.getEntities()[d].getDestructible()&&c.getEntities()[d].getTeam()!=e.getTeam()){f.push(d)
 }}if(f.length>0){return c.getEntities()[f[Random.between(0,f.length-1)]]}else{return null
-}};return b}(Item));var TokenType;(function(a){a[a.STRENGTH=0]="STRENGTH";a[a.SPEED=1]="SPEED";
-a[a.REGEN=2]="REGEN";a[a.FIRE=3]="FIRE";a[a.PURPLE=4]="PURPLE";a[a.NONE=5]="NONE"
+}};return b}(Item));var TokenType;(function(a){a[a.NONE=0]="NONE";a[a.STRENGTH=1]="STRENGTH";
+a[a.SPEED=2]="SPEED";a[a.REGEN=3]="REGEN";a[a.FIRE=4]="FIRE";a[a.PURPLE=5]="PURPLE"
 })(TokenType||(TokenType={}));var Treasure=(function(a){__extends(b,a);function b(c){var d=a.call(this,c)||this;
 d.renderArea=new RenderArea();d.renderArea.resizeFromArray(Database.getAscii("places/treasure"),57,3);
 d.update();return d}b.prototype.getRenderArea=function(){return this.renderArea};

@@ -14,7 +14,8 @@ var __extends = (this && this.__extends) || (function () {
 ///<reference path = "Item.ts"/>
 var Token = /** @class */ (function (_super) {
     __extends(Token, _super);
-    function Token(type, power, sweetTooth) {
+    function Token(type) {
+        if (type === void 0) { type = null; }
         var _this = _super.call(this, "token", //savingName
         "tokenName", //databaseName
         "tokenDescription", //databaseDescriptionName 
@@ -23,31 +24,28 @@ var Token = /** @class */ (function (_super) {
         _this.tokenType = null;
         _this.power = 2;
         //Unique variables
+        //TODO make new(?) classes based on token type
         _this.currentTimer = 0;
-        _this.maxTimer = 10;
-        _this.applied = false;
-        _this.tokenType = type;
-        _this.power = power;
-        _this.sweetTooth = sweetTooth;
+        if (type == null) {
+            _this.tokenType = Math.floor(Math.random() * 6);
+        }
+        else {
+            _this.tokenType = type;
+        }
+        if (type == TokenType.NONE) {
+            _this.power = 0;
+        }
+        else {
+            _this.power = Math.floor((Math.random() * 10) + 1);
+        }
+        _this.setName();
+        _this.maxTimer = 12 - _this.power;
         return _this;
-        /*switch (this.tokenType) {
-            case TokenType.SPEED: {
-                //this.sweetTooth.getQuestEntityWeapon(null, this.sweetTooth.getPlayer()).setDamage(this.power);
-                break;
-            }
-            case TokenType.STRENGTH: {
-                this.sweetTooth.getQuestEntityWeapon(null).setDamage(this.power,true);
-                break;
-            }
-            default: {
-                break;
-            }
-        }*/
     }
     Token.prototype.update = function (player, quest) {
         switch (this.tokenType) {
             case TokenType.REGEN: {
-                player.heal(1);
+                player.heal(this.power / 5);
                 break;
             }
             case TokenType.FIRE: {
@@ -83,10 +81,80 @@ var Token = /** @class */ (function (_super) {
     Token.prototype.getPower = function () {
         return this.power;
     };
+    Token.prototype.getTokenName = function () {
+        return this.tokenName;
+    };
+    //public setters
+    Token.prototype.setType = function (tokenType) {
+        this.tokenType = tokenType;
+    };
+    Token.prototype.setPower = function (power) {
+        this.power = power;
+    };
+    Token.prototype.printType = function () {
+        switch (this.tokenType) {
+            case TokenType.NONE: {
+                return "EMPTY";
+            }
+            case TokenType.STRENGTH: {
+                return "STRENGTH";
+            }
+            case TokenType.SPEED: {
+                return "SPEED";
+            }
+            case TokenType.REGEN: {
+                return "REGENERATION";
+            }
+            case TokenType.FIRE: {
+                return "FIREBALL";
+            }
+            case TokenType.PURPLE: {
+                return "PURPLE MAGIC";
+            }
+        }
+    };
+    ///PRIVATE FUNCTIONS
+    Token.prototype.setName = function (tokenName) {
+        if (tokenName === void 0) { tokenName = null; }
+        var retVal = "";
+        if (tokenName == null) {
+            switch (this.tokenType) {
+                case TokenType.NONE: {
+                    retVal += "NA";
+                    break;
+                }
+                case TokenType.STRENGTH: {
+                    retVal += "STR";
+                    break;
+                }
+                case TokenType.SPEED: {
+                    retVal += "SPD";
+                    break;
+                }
+                case TokenType.REGEN: {
+                    retVal += "RGN";
+                    break;
+                }
+                case TokenType.FIRE: {
+                    retVal += "FIR";
+                    break;
+                }
+                case TokenType.PURPLE: {
+                    retVal += "PRP";
+                    break;
+                }
+            }
+            retVal += this.power.toString() + Math.floor((Math.random() * 100) + 1); //ensures unique hashkey name
+            this.tokenName = retVal;
+        }
+        else
+            this.tokenName = tokenName;
+    };
     //literally stolen from RedEnchantedGloves
     Token.prototype.castFireball = function (player, quest) {
         // Create the fireball
-        var fireball = new Fireball(quest, player.getSpellCastingPosition(), new Naming("A small fireball", "a small fireball"), new Color(ColorType.RED_ENCHANTED_GLOVES_FIREBALL), new Pos(2, 1), 15, player.getAndPossiblyCreateSpellCastingDamageReason(new Naming("A small fireball", "a small fireball")));
+        var fireball = new Fireball(quest, player.getSpellCastingPosition(), new Naming("A small fireball", "a small fireball"), new Color(ColorType.RED_ENCHANTED_GLOVES_FIREBALL), new Pos(2, 1), this.power, // power directly correlletes for fireballs to make up for aimlessness
+        player.getAndPossiblyCreateSpellCastingDamageReason(new Naming("A small fireball", "a small fireball")));
         // Set the direction
         fireball.setTargetTypeNoTarget(Algo.getRandomNotImmobileDirectionUpToThisSpeed(1).multiply(new Pos(2, 2)));
         // Add the entity
@@ -95,7 +163,8 @@ var Token = /** @class */ (function (_super) {
     // MORE STOLEN METHODS FROM MonkeyWizardStaffMotherClass
     Token.prototype.castPurpleBall = function (player, quest, target, speed) {
         if (speed === void 0) { speed = new Pos(2, 1); }
-        var ball = new Fireball(quest, player.getSpellCastingPosition(), new Naming("An magical purple ball", "a magical purple ball"), new Color(ColorType.MONKEY_WIZARD_BALL), new Pos(2, 1), 15, player.getAndPossiblyCreateSpellCastingDamageReason(new Naming("An magical purple ball", "a magical purple ball")));
+        var ball = new Fireball(quest, player.getSpellCastingPosition(), new Naming("An magical purple ball", "a magical purple ball"), new Color(ColorType.MONKEY_WIZARD_BALL), new Pos(2, 1), this.power - (this.power / 3), //power is direct damage minus a few for balance 
+        player.getAndPossiblyCreateSpellCastingDamageReason(new Naming("An magical purple ball", "a magical purple ball")));
         // Set the target
         ball.setTargetTypeTargetEntity(target, null, speed);
         // Add it to the quest

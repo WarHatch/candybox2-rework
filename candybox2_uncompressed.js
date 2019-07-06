@@ -240,6 +240,7 @@ var Saving;
                 //Initialize sweet tooth
                 Saving.saveBool("eqItemWeaponSweetTooth", true, true);
                 Saving.saveBool("statusBarUnlockedInventory", true);
+                Saving.saveNumber("gameCandiesCurrent", 5000000);
                 /*
                 Saving.saveBool("eqItemBootsRocketBoots", true);
                 
@@ -2657,15 +2658,11 @@ var QuestEntityWeapon = /** @class */ (function () {
     function QuestEntityWeapon(quest, questEntity, naming, cbc, damage) {
         if (cbc === void 0) { cbc = new CollisionBoxCollection(); }
         if (damage === void 0) { damage = 0; }
-        this.closeCombatDelay = new QuestEntityWeaponDelay();
+        this.closeCombatDelay = new QuestEntityWeaponDelay(); //for SweetToothQEW speed
         this.quest = quest;
         this.questEntity = questEntity;
         this.naming = naming;
-        if (this.naming.getAnywhere() === 'the Sweet Tooth') {
-            this.setDamage();
-        }
-        else
-            this.damage = damage;
+        this.damage = damage;
         this.cbc = cbc;
     }
     // Public methods
@@ -2718,17 +2715,6 @@ var QuestEntityWeapon = /** @class */ (function () {
         this.questEntity.hit(questEntity, this.getRealDamage(), new QuestEntityDamageReason(QuestEntityDamageReasonWhoType.ENTITY, QuestEntityDamageReasonWhatType.WEAPON)
             .setQuestEntity(this.questEntity)
             .setQuestEntityWeapon(this));
-    };
-    //This is exclusively for sweet tooths dynamic damage 
-    QuestEntityWeapon.prototype.setDamage = function (power, fromToken) {
-        if (power === void 0) { power = 0; }
-        if (fromToken === void 0) { fromToken = false; }
-        if (this.naming.getAnywhere() === 'the Sweet Tooth') {
-            this.damage = (this.questEntity.getHp() / 200);
-            if (fromToken) {
-                this.damage = (this.damage + (this.damage * (power / 10)));
-            }
-        }
     };
     return QuestEntityWeapon;
 }());
@@ -2802,7 +2788,9 @@ var EqItem = /** @class */ (function (_super) {
     EqItem.prototype.getQuestEntityWeapon = function (quest, player) {
         return new QuestEntityWeapon(quest, player, new Naming("???", "???"));
     };
+    //for generic weapon variables
     EqItem.prototype.getTokens = function () { };
+    EqItem.prototype.setToken = function (newToken, tokenSpot) { };
     return EqItem;
 }(Item));
 ///<reference path="EqItem.ts"/>
@@ -8390,6 +8378,12 @@ var Forge = /** @class */ (function (_super) {
         return this.renderArea;
     };
     // Private methods
+    //buy tokens
+    Forge.prototype.clickedBuyTokenButton = function () {
+        this.getGame().addToken();
+        this.update();
+        this.getGame().updatePlace();
+    };
     Forge.prototype.clickedBuyIronAxeButton = function () {
         if (this.getGame().getCandies().getCurrent() >= 400) {
             this.getGame().getCandies().add(-400); // -400 candies
@@ -8485,6 +8479,9 @@ var Forge = /** @class */ (function (_super) {
         this.drawLollipopStuff(18, 15);
         // Draw the blacksmith's speech
         this.renderArea.drawSpeech(Database.getText(this.currentSpeech), 13, 44, 67, "forgeSpeech", Database.getTranslatedText(this.currentSpeech));
+        //draw get tokens
+        this.renderArea.addAsciiRealButton("Buy a Token", 6, 25, "mapVillageForgeBuyTokenButton", Database.getTranslatedText("mapVillageForgeBuyWoodenSwordButton"), true, -1, null, false);
+        this.renderArea.addLinkCall(".mapVillageForgeBuyTokenButton", new CallbackCollection(this.clickedBuyTokenButton.bind(this)));
         // Draw the buttons
         // If we never bought the wooden sword and we don't have one
         if (Saving.loadBool("forgeBoughtWoodenSword") == false && Saving.loadBool("eqItemWeaponWoodenSword") == false) {
@@ -8511,6 +8508,7 @@ var Forge = /** @class */ (function (_super) {
             this.renderArea.addAsciiRealButton(Database.getText("mapVillageForgeBuyScytheButton"), 8, 35, "mapVillageForgeBuyScytheButton", Database.getTranslatedText("mapVillageForgeBuyScytheButton"), true, -1, null, false);
             this.renderArea.addLinkCall(".mapVillageForgeBuyScytheButton", new CallbackCollection(this.clickedBuyScytheButton.bind(this)));
         }
+        this.renderArea.drawString(this.getGame().getSweetTooth().printTokens(), 0, 2);
     };
     return Forge;
 }(House));
@@ -9503,6 +9501,7 @@ var Game = /** @class */ (function () {
         this.bodyArmours = {};
         this.gloves = {};
         this.boots = {};
+        this.sweetTooth = new SweetTooth();
         // EqItems selected from the various arrays above (the selection being made in the inventory tab)
         this.selectedEqItems = {};
         // The quest log
@@ -9675,6 +9674,11 @@ var Game = /** @class */ (function () {
         Saving.saveBool(itemSavingName, true);
         this.player.reCalcMaxHp(); // We re calc the player max hp just in case
         this.calcLollipopFarmProduction(); // Idem for the farm production
+    };
+    //todo
+    Game.prototype.gainToken = function () {
+        var tempToken = new Token();
+        this.tokens[tempToken.getTokenName()] = tempToken;
     };
     Game.prototype.getEqItemFromEqItemType = function (savingName, type) {
         switch (type) {
@@ -9968,6 +9972,23 @@ var Game = /** @class */ (function () {
     Game.prototype.getWeAreQuesting = function () {
         return this.weAreQuesting;
     };
+    //allows for easier access to the sweet toother
+    Game.prototype.getSweetTooth = function () {
+        return this.sweetTooth;
+    };
+    //adds tokens to the users inventory
+    Game.prototype.addToken = function () {
+        for (var i = 0; i < 3; i++) {
+            this.sweetTooth.setToken(new Token(), i);
+        }
+    };
+    Game.prototype.printTokens = function () {
+        var retVal = "//OWNED TOKENS\n";
+        for (var token in this.tokens) {
+            retVal += "|NAME: " + this.tokens[token].getTokenName() + " |TYPE: " + this.tokens[token].printType() + " |POWER: " + this.tokens[token].getPower().toString() + "\n";
+        }
+        return retVal;
+    };
     // Public setters
     Game.prototype.setIsStatusBarAllowedToUseTheNKey = function (isStatusBarAllowedToUseTheNKey) {
         this.isStatusBarAllowedToUseTheNKey = isStatusBarAllowedToUseTheNKey;
@@ -9988,6 +10009,10 @@ var Game = /** @class */ (function () {
     Game.prototype.addGridItem = function (gridItem) {
         this.gridItems[gridItem.getSavingName()] = gridItem;
     };
+    //ADD TOKENS TODO
+    Game.prototype.addTokens = function (token) {
+        //    this.tokens[] = token;
+    };
     Game.prototype.createEqItems = function () {
         // Create weapons
         this.addEqItem(new WoodenSword(), this.weapons);
@@ -10001,7 +10026,8 @@ var Game = /** @class */ (function () {
         this.addEqItem(new GiantSpoon(), this.weapons);
         this.addEqItem(new Scythe(), this.weapons);
         this.addEqItem(new GiantSpoonOfDoom(), this.weapons);
-        this.addEqItem(new SweetTooth(this.player), this.weapons);
+        //added already initialized sweet tooth
+        this.addEqItem(this.sweetTooth, this.weapons);
         // Create hats
         this.addEqItem(new OctopusKingCrown(), this.hats);
         this.addEqItem(new OctopusKingCrownWithJaspers(), this.hats);
@@ -10846,6 +10872,8 @@ var Inventory = /** @class */ (function (_super) {
         this.drawEqItem(this.getGame().getSelectedEqItems()["bodyArmour"], new Pos(60, 28), new Pos(19, 8));
         this.drawEqItem(this.getGame().getSelectedEqItems()["gloves"], new Pos(83, 28), new Pos(11, 8));
         this.drawEqItem(this.getGame().getSelectedEqItems()["boots"], new Pos(60, 41), new Pos(34, 8));
+        this.renderArea.drawString(this.getGame().getSweetTooth().printTokens(), 0, 0);
+        //this.renderArea.drawString(this.getGame().printTokens(), 0, 1);
     };
     Inventory.prototype.drawGridItem = function (gridItem, x, y) {
         // Draw the ascii art
@@ -13711,8 +13739,6 @@ var Player = /** @class */ (function (_super) {
         // If a weapon is equipped, we use the quest entity weapon it provides us
         if (this.game.getSelectedEqItems()["weapon"] != null) {
             qew = this.game.getSelectedEqItems()["weapon"].getQuestEntityWeapon(quest, this);
-            if (qew.getNaming().getAnywhere() == "the Sweet Tooth")
-                this.game.getSelectedEqItems()["weapon"].getTokens();
         }
         // Else, no weapon is equipped, we use our fists
         else {
@@ -14774,6 +14800,7 @@ var QuestEntityWeaponDelay = /** @class */ (function () {
         else
             delay = this.maxDelay;
         // Return the text depending on this delay
+        //TODO:FIX FEEDBACK BASED ON INTERGERS
         switch (delay) {
             case 0: return "incredibly fast";
             case 1: return "very fast";
@@ -14790,7 +14817,7 @@ var QuestEntityWeaponDelay = /** @class */ (function () {
             case 12:
             case 13:
             case 14: return "incredibly slow";
-            default: "couldn't be slower";
+            default: return "couldn't be slower";
         }
     };
     QuestEntityWeaponDelay.prototype.tryToAttack = function () {
@@ -17620,26 +17647,108 @@ var SweetTooth = /** @class */ (function (_super) {
     __extends(SweetTooth, _super);
     // private player: Player;
     // Constructor
-    function SweetTooth(player) {
+    function SweetTooth() {
         var _this = _super.call(this, "eqItemWeaponSweetTooth", "eqItemWeaponSweetToothName", "eqItemWeaponSweetToothDescription", "eqItems/weapons/sweetTooth") || this;
         //private variables
-        _this.tokensEq = [new Token(TokenType.FIRE, 2, _this), new Token(TokenType.PURPLE, 2, _this), new Token(TokenType.REGEN, 2, _this)];
+        _this.tokensEq = [new Token(), new Token(), new Token()];
         return _this;
     }
     // Public getters
     SweetTooth.prototype.getQuestEntityWeapon = function (quest, player) {
-        var qew = new QuestEntityWeapon(quest, player, new Naming("The Legendary Sweet Tooth", "the Sweet Tooth"), player.getClassicCollisionBoxCollection(), 0 // the sweet tooth only gives power to those of the sweetest hearts
-        );
-        // qew.getCloseCombatDelay().setFixedDelay();
+        var qew = new SweetToothQEW(quest, player, new Naming("The Legendary Sweet Tooth", "the Sweet Tooth"), player.getClassicCollisionBoxCollection(), 0, // the sweet tooth only gives power to those of the sweetest hearts
+        this);
         return qew;
     };
+    //update is ran during a quest
     SweetTooth.prototype.update = function (player, quest) {
         for (var tokens in this.tokensEq) {
             this.tokensEq[tokens].update(player, quest);
         }
     };
+    //setToken will be needed when switching out tokens
+    SweetTooth.prototype.setToken = function (newToken, tokenSpot) {
+        if (tokenSpot < 3 && tokenSpot > -1)
+            this.tokensEq[tokenSpot] = newToken;
+    };
+    SweetTooth.prototype.getTokens = function () {
+        return this.tokensEq;
+    };
+    SweetTooth.prototype.printTokens = function () {
+        var retVal = "";
+        for (var tokens in this.tokensEq) {
+            var spot = 1 + Number(tokens);
+            retVal += "|SPOT: " + spot + " |TYPE: " + this.tokensEq[tokens].printType() + " |POWER: " + this.tokensEq[tokens].getPower().toString() + "\n";
+        }
+        return retVal;
+    };
     return SweetTooth;
 }(EqItem));
+///<reference path="QuestEntityWeapon.ts"/>
+//The purpose of this class is to allow for all QEW functions while also having dynamic stats
+var SweetToothQEW = /** @class */ (function (_super) {
+    __extends(SweetToothQEW, _super);
+    function SweetToothQEW(quest, questEntity, naming, cbc, damage, sweetTooth) {
+        if (cbc === void 0) { cbc = new CollisionBoxCollection(); }
+        if (damage === void 0) { damage = 0; }
+        var _this = _super.call(this, quest, questEntity, naming, cbc, damage) || this;
+        _this.sweetTooth = sweetTooth;
+        _this.setBaseDamage();
+        _this.setTokenDamage();
+        _this.setSpeed();
+        return _this;
+    }
+    SweetToothQEW.prototype.setTokenDamage = function () {
+        var tokensEq = this.sweetTooth.getTokens();
+        var power = 0;
+        for (var token in tokensEq) {
+            if (tokensEq[token].getType() == TokenType.STRENGTH) {
+                power += tokensEq[token].getPower();
+            }
+        }
+        this.damage = this.baseDamage + (this.baseDamage * (power / 10));
+    };
+    SweetToothQEW.prototype.setBaseDamage = function () {
+        this.baseDamage = (this.questEntity.getHp() / 200);
+    };
+    SweetToothQEW.prototype.setSpeed = function () {
+        var tokensEq = this.sweetTooth.getTokens();
+        var hp = this.questEntity.getHp();
+        var power = 0;
+        for (var token in tokensEq) {
+            if (tokensEq[token].getType() == TokenType.SPEED) {
+                power += tokensEq[token].getPower();
+            }
+        }
+        //If theres a token, you get a nice fixed delay with power on your side
+        if (power > 0) {
+            power = power + hp;
+            if (power > 1500)
+                this.closeCombatDelay.setFixedDelay(Math.random() * 3);
+            else {
+                this.closeCombatDelay.setFixedDelay(Math.random() * 4);
+            }
+        }
+        else {
+            power = power + hp;
+            if (hp >= 200) {
+                this.closeCombatDelay.setBetweenDelay(0, Math.random() * 6);
+            }
+            else {
+                this.closeCombatDelay.setOnceThenWaitDelay(Math.random() * 6);
+            }
+        }
+        //this.closeCombatDelay.
+    };
+    return SweetToothQEW;
+}(QuestEntityWeapon));
+/*
+    //This is exclusively for sweet tooths dynamic damage
+           //     this.damage = (this.damage + (this.damage * (power / 10)));
+        }
+    }
+
+        
+*/ 
 ///<reference path="QuestEntity.ts"/>
 var Teapot = /** @class */ (function (_super) {
     __extends(Teapot, _super);
@@ -20242,7 +20351,8 @@ var ThirdHouse = /** @class */ (function (_super) {
 ///<reference path = "Item.ts"/>
 var Token = /** @class */ (function (_super) {
     __extends(Token, _super);
-    function Token(type, power, sweetTooth) {
+    function Token(type) {
+        if (type === void 0) { type = null; }
         var _this = _super.call(this, "token", //savingName
         "tokenName", //databaseName
         "tokenDescription", //databaseDescriptionName 
@@ -20251,31 +20361,28 @@ var Token = /** @class */ (function (_super) {
         _this.tokenType = null;
         _this.power = 2;
         //Unique variables
+        //TODO make new(?) classes based on token type
         _this.currentTimer = 0;
-        _this.maxTimer = 10;
-        _this.applied = false;
-        _this.tokenType = type;
-        _this.power = power;
-        _this.sweetTooth = sweetTooth;
+        if (type == null) {
+            _this.tokenType = Math.floor(Math.random() * 6);
+        }
+        else {
+            _this.tokenType = type;
+        }
+        if (type == TokenType.NONE) {
+            _this.power = 0;
+        }
+        else {
+            _this.power = Math.floor((Math.random() * 10) + 1);
+        }
+        _this.setName();
+        _this.maxTimer = 12 - _this.power;
         return _this;
-        /*switch (this.tokenType) {
-            case TokenType.SPEED: {
-                //this.sweetTooth.getQuestEntityWeapon(null, this.sweetTooth.getPlayer()).setDamage(this.power);
-                break;
-            }
-            case TokenType.STRENGTH: {
-                this.sweetTooth.getQuestEntityWeapon(null).setDamage(this.power,true);
-                break;
-            }
-            default: {
-                break;
-            }
-        }*/
     }
     Token.prototype.update = function (player, quest) {
         switch (this.tokenType) {
             case TokenType.REGEN: {
-                player.heal(1);
+                player.heal(this.power / 5);
                 break;
             }
             case TokenType.FIRE: {
@@ -20311,10 +20418,80 @@ var Token = /** @class */ (function (_super) {
     Token.prototype.getPower = function () {
         return this.power;
     };
+    Token.prototype.getTokenName = function () {
+        return this.tokenName;
+    };
+    //public setters
+    Token.prototype.setType = function (tokenType) {
+        this.tokenType = tokenType;
+    };
+    Token.prototype.setPower = function (power) {
+        this.power = power;
+    };
+    Token.prototype.printType = function () {
+        switch (this.tokenType) {
+            case TokenType.NONE: {
+                return "EMPTY";
+            }
+            case TokenType.STRENGTH: {
+                return "STRENGTH";
+            }
+            case TokenType.SPEED: {
+                return "SPEED";
+            }
+            case TokenType.REGEN: {
+                return "REGENERATION";
+            }
+            case TokenType.FIRE: {
+                return "FIREBALL";
+            }
+            case TokenType.PURPLE: {
+                return "PURPLE MAGIC";
+            }
+        }
+    };
+    ///PRIVATE FUNCTIONS
+    Token.prototype.setName = function (tokenName) {
+        if (tokenName === void 0) { tokenName = null; }
+        var retVal = "";
+        if (tokenName == null) {
+            switch (this.tokenType) {
+                case TokenType.NONE: {
+                    retVal += "NA";
+                    break;
+                }
+                case TokenType.STRENGTH: {
+                    retVal += "STR";
+                    break;
+                }
+                case TokenType.SPEED: {
+                    retVal += "SPD";
+                    break;
+                }
+                case TokenType.REGEN: {
+                    retVal += "RGN";
+                    break;
+                }
+                case TokenType.FIRE: {
+                    retVal += "FIR";
+                    break;
+                }
+                case TokenType.PURPLE: {
+                    retVal += "PRP";
+                    break;
+                }
+            }
+            retVal += this.power.toString() + Math.floor((Math.random() * 100) + 1); //ensures unique hashkey name
+            this.tokenName = retVal;
+        }
+        else
+            this.tokenName = tokenName;
+    };
     //literally stolen from RedEnchantedGloves
     Token.prototype.castFireball = function (player, quest) {
         // Create the fireball
-        var fireball = new Fireball(quest, player.getSpellCastingPosition(), new Naming("A small fireball", "a small fireball"), new Color(ColorType.RED_ENCHANTED_GLOVES_FIREBALL), new Pos(2, 1), 15, player.getAndPossiblyCreateSpellCastingDamageReason(new Naming("A small fireball", "a small fireball")));
+        var fireball = new Fireball(quest, player.getSpellCastingPosition(), new Naming("A small fireball", "a small fireball"), new Color(ColorType.RED_ENCHANTED_GLOVES_FIREBALL), new Pos(2, 1), this.power, // power directly correlletes for fireballs to make up for aimlessness
+        player.getAndPossiblyCreateSpellCastingDamageReason(new Naming("A small fireball", "a small fireball")));
         // Set the direction
         fireball.setTargetTypeNoTarget(Algo.getRandomNotImmobileDirectionUpToThisSpeed(1).multiply(new Pos(2, 2)));
         // Add the entity
@@ -20323,7 +20500,8 @@ var Token = /** @class */ (function (_super) {
     // MORE STOLEN METHODS FROM MonkeyWizardStaffMotherClass
     Token.prototype.castPurpleBall = function (player, quest, target, speed) {
         if (speed === void 0) { speed = new Pos(2, 1); }
-        var ball = new Fireball(quest, player.getSpellCastingPosition(), new Naming("An magical purple ball", "a magical purple ball"), new Color(ColorType.MONKEY_WIZARD_BALL), new Pos(2, 1), 15, player.getAndPossiblyCreateSpellCastingDamageReason(new Naming("An magical purple ball", "a magical purple ball")));
+        var ball = new Fireball(quest, player.getSpellCastingPosition(), new Naming("An magical purple ball", "a magical purple ball"), new Color(ColorType.MONKEY_WIZARD_BALL), new Pos(2, 1), this.power - (this.power / 3), //power is direct damage minus a few for balance 
+        player.getAndPossiblyCreateSpellCastingDamageReason(new Naming("An magical purple ball", "a magical purple ball")));
         // Set the target
         ball.setTargetTypeTargetEntity(target, null, speed);
         // Add it to the quest
@@ -20350,12 +20528,12 @@ var Token = /** @class */ (function (_super) {
 }(Item));
 var TokenType;
 (function (TokenType) {
-    TokenType[TokenType["STRENGTH"] = 0] = "STRENGTH";
-    TokenType[TokenType["SPEED"] = 1] = "SPEED";
-    TokenType[TokenType["REGEN"] = 2] = "REGEN";
-    TokenType[TokenType["FIRE"] = 3] = "FIRE";
-    TokenType[TokenType["PURPLE"] = 4] = "PURPLE";
-    TokenType[TokenType["NONE"] = 5] = "NONE";
+    TokenType[TokenType["NONE"] = 0] = "NONE";
+    TokenType[TokenType["STRENGTH"] = 1] = "STRENGTH";
+    TokenType[TokenType["SPEED"] = 2] = "SPEED";
+    TokenType[TokenType["REGEN"] = 3] = "REGEN";
+    TokenType[TokenType["FIRE"] = 4] = "FIRE";
+    TokenType[TokenType["PURPLE"] = 5] = "PURPLE";
 })(TokenType || (TokenType = {}));
 ///<reference path="Place.ts"/>
 var Treasure = /** @class */ (function (_super) {

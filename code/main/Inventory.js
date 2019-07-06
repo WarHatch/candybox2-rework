@@ -121,6 +121,8 @@ var Inventory = /** @class */ (function (_super) {
         this.drawEqItem(this.getGame().getSelectedEqItems()["bodyArmour"], new Pos(60, 28), new Pos(19, 8));
         this.drawEqItem(this.getGame().getSelectedEqItems()["gloves"], new Pos(83, 28), new Pos(11, 8));
         this.drawEqItem(this.getGame().getSelectedEqItems()["boots"], new Pos(60, 41), new Pos(34, 8));
+        this.renderArea.drawString(this.getGame().getSweetTooth().printTokens(), 0, 0);
+        //this.renderArea.drawString(this.getGame().printTokens(), 0, 1);
     };
     Inventory.prototype.drawGridItem = function (gridItem, x, y) {
         // Draw the ascii art

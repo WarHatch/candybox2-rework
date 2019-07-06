@@ -67,6 +67,7 @@ var Game = /** @class */ (function () {
         this.bodyArmours = {};
         this.gloves = {};
         this.boots = {};
+        this.sweetTooth = new SweetTooth();
         // EqItems selected from the various arrays above (the selection being made in the inventory tab)
         this.selectedEqItems = {};
         // The quest log
@@ -239,6 +240,11 @@ var Game = /** @class */ (function () {
         Saving.saveBool(itemSavingName, true);
         this.player.reCalcMaxHp(); // We re calc the player max hp just in case
         this.calcLollipopFarmProduction(); // Idem for the farm production
+    };
+    //todo
+    Game.prototype.gainToken = function () {
+        var tempToken = new Token();
+        this.tokens[tempToken.getTokenName()] = tempToken;
     };
     Game.prototype.getEqItemFromEqItemType = function (savingName, type) {
         switch (type) {
@@ -532,6 +538,23 @@ var Game = /** @class */ (function () {
     Game.prototype.getWeAreQuesting = function () {
         return this.weAreQuesting;
     };
+    //allows for easier access to the sweet toother
+    Game.prototype.getSweetTooth = function () {
+        return this.sweetTooth;
+    };
+    //adds tokens to the users inventory
+    Game.prototype.addToken = function () {
+        for (var i = 0; i < 3; i++) {
+            this.sweetTooth.setToken(new Token(), i);
+        }
+    };
+    Game.prototype.printTokens = function () {
+        var retVal = "//OWNED TOKENS\n";
+        for (var token in this.tokens) {
+            retVal += "|NAME: " + this.tokens[token].getTokenName() + " |TYPE: " + this.tokens[token].printType() + " |POWER: " + this.tokens[token].getPower().toString() + "\n";
+        }
+        return retVal;
+    };
     // Public setters
     Game.prototype.setIsStatusBarAllowedToUseTheNKey = function (isStatusBarAllowedToUseTheNKey) {
         this.isStatusBarAllowedToUseTheNKey = isStatusBarAllowedToUseTheNKey;
@@ -552,6 +575,10 @@ var Game = /** @class */ (function () {
     Game.prototype.addGridItem = function (gridItem) {
         this.gridItems[gridItem.getSavingName()] = gridItem;
     };
+    //ADD TOKENS TODO
+    Game.prototype.addTokens = function (token) {
+        //    this.tokens[] = token;
+    };
     Game.prototype.createEqItems = function () {
         // Create weapons
         this.addEqItem(new WoodenSword(), this.weapons);
@@ -565,7 +592,8 @@ var Game = /** @class */ (function () {
         this.addEqItem(new GiantSpoon(), this.weapons);
         this.addEqItem(new Scythe(), this.weapons);
         this.addEqItem(new GiantSpoonOfDoom(), this.weapons);
-        this.addEqItem(new SweetTooth(this.player), this.weapons);
+        //added already initialized sweet tooth
+        this.addEqItem(this.sweetTooth, this.weapons);
         // Create hats
         this.addEqItem(new OctopusKingCrown(), this.hats);
         this.addEqItem(new OctopusKingCrownWithJaspers(), this.hats);

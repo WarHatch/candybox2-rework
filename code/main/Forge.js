@@ -54,6 +54,12 @@ var Forge = /** @class */ (function (_super) {
         return this.renderArea;
     };
     // Private methods
+    //buy tokens
+    Forge.prototype.clickedBuyTokenButton = function () {
+        this.getGame().addToken();
+        this.update();
+        this.getGame().updatePlace();
+    };
     Forge.prototype.clickedBuyIronAxeButton = function () {
         if (this.getGame().getCandies().getCurrent() >= 400) {
             this.getGame().getCandies().add(-400); // -400 candies
@@ -149,6 +155,9 @@ var Forge = /** @class */ (function (_super) {
         this.drawLollipopStuff(18, 15);
         // Draw the blacksmith's speech
         this.renderArea.drawSpeech(Database.getText(this.currentSpeech), 13, 44, 67, "forgeSpeech", Database.getTranslatedText(this.currentSpeech));
+        //draw get tokens
+        this.renderArea.addAsciiRealButton("Buy a Token", 6, 25, "mapVillageForgeBuyTokenButton", Database.getTranslatedText("mapVillageForgeBuyWoodenSwordButton"), true, -1, null, false);
+        this.renderArea.addLinkCall(".mapVillageForgeBuyTokenButton", new CallbackCollection(this.clickedBuyTokenButton.bind(this)));
         // Draw the buttons
         // If we never bought the wooden sword and we don't have one
         if (Saving.loadBool("forgeBoughtWoodenSword") == false && Saving.loadBool("eqItemWeaponWoodenSword") == false) {
@@ -175,6 +184,7 @@ var Forge = /** @class */ (function (_super) {
             this.renderArea.addAsciiRealButton(Database.getText("mapVillageForgeBuyScytheButton"), 8, 35, "mapVillageForgeBuyScytheButton", Database.getTranslatedText("mapVillageForgeBuyScytheButton"), true, -1, null, false);
             this.renderArea.addLinkCall(".mapVillageForgeBuyScytheButton", new CallbackCollection(this.clickedBuyScytheButton.bind(this)));
         }
+        this.renderArea.drawString(this.getGame().getSweetTooth().printTokens(), 0, 2);
     };
     return Forge;
 }(House));

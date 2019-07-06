@@ -16,6 +16,7 @@ var QuestEntityWeaponDelay = /** @class */ (function () {
         else
             delay = this.maxDelay;
         // Return the text depending on this delay
+        //TODO:FIX FEEDBACK BASED ON INTERGERS
         switch (delay) {
             case 0: return "incredibly fast";
             case 1: return "very fast";
@@ -32,7 +33,7 @@ var QuestEntityWeaponDelay = /** @class */ (function () {
             case 12:
             case 13:
             case 14: return "incredibly slow";
-            default: "couldn't be slower";
+            default: return "couldn't be slower";
         }
     };
     QuestEntityWeaponDelay.prototype.tryToAttack = function () {

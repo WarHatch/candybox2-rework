@@ -16,23 +16,39 @@ var SweetTooth = /** @class */ (function (_super) {
     __extends(SweetTooth, _super);
     // private player: Player;
     // Constructor
-    function SweetTooth(player) {
+    function SweetTooth() {
         var _this = _super.call(this, "eqItemWeaponSweetTooth", "eqItemWeaponSweetToothName", "eqItemWeaponSweetToothDescription", "eqItems/weapons/sweetTooth") || this;
         //private variables
-        _this.tokensEq = [new Token(TokenType.FIRE, 2, _this), new Token(TokenType.PURPLE, 2, _this), new Token(TokenType.REGEN, 2, _this)];
+        _this.tokensEq = [new Token(), new Token(), new Token()];
         return _this;
     }
     // Public getters
     SweetTooth.prototype.getQuestEntityWeapon = function (quest, player) {
-        var qew = new QuestEntityWeapon(quest, player, new Naming("The Legendary Sweet Tooth", "the Sweet Tooth"), player.getClassicCollisionBoxCollection(), 0 // the sweet tooth only gives power to those of the sweetest hearts
-        );
-        // qew.getCloseCombatDelay().setFixedDelay();
+        var qew = new SweetToothQEW(quest, player, new Naming("The Legendary Sweet Tooth", "the Sweet Tooth"), player.getClassicCollisionBoxCollection(), 0, // the sweet tooth only gives power to those of the sweetest hearts
+        this);
         return qew;
     };
+    //update is ran during a quest
     SweetTooth.prototype.update = function (player, quest) {
         for (var tokens in this.tokensEq) {
             this.tokensEq[tokens].update(player, quest);
         }
+    };
+    //setToken will be needed when switching out tokens
+    SweetTooth.prototype.setToken = function (newToken, tokenSpot) {
+        if (tokenSpot < 3 && tokenSpot > -1)
+            this.tokensEq[tokenSpot] = newToken;
+    };
+    SweetTooth.prototype.getTokens = function () {
+        return this.tokensEq;
+    };
+    SweetTooth.prototype.printTokens = function () {
+        var retVal = "";
+        for (var tokens in this.tokensEq) {
+            var spot = 1 + Number(tokens);
+            retVal += "|SPOT: " + spot + " |TYPE: " + this.tokensEq[tokens].printType() + " |POWER: " + this.tokensEq[tokens].getPower().toString() + "\n";
+        }
+        return retVal;
     };
     return SweetTooth;
 }(EqItem));

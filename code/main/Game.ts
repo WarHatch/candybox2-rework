@@ -96,6 +96,8 @@ class Game{
     private bodyArmours: { [s: string]: EqItem; } = {};
     private gloves: { [s: string]: EqItem; } = {};
     private boots: { [s: string]: EqItem; } = {};
+
+    private sweetTooth = new SweetTooth();
     
     // EqItems selected from the various arrays above (the selection being made in the inventory tab)
     private selectedEqItems: { [s: string]: EqItem; } = {};
@@ -266,6 +268,12 @@ class Game{
         
         this.player.reCalcMaxHp(); // We re calc the player max hp just in case
         this.calcLollipopFarmProduction(); // Idem for the farm production
+    }
+
+    //todo
+    public gainToken(): void {
+        var tempToken = new Token();
+        this.tokens[tempToken.getTokenName()] = tempToken;
     }
     
     public getEqItemFromEqItemType(savingName: string, type: EqItemType): EqItem{
@@ -535,8 +543,7 @@ class Game{
     
     public getHotkeys(): { [s: string]: Hotkey;}{
         return this.hotkeys;
-    }
-    
+    }    
     public getGridItems(): { [s: string]: GridItem; }{
         return this.gridItems;
     }
@@ -616,7 +623,31 @@ class Game{
     public getWeAreQuesting(): boolean{
         return this.weAreQuesting;
     }
-    
+
+    //allows for easier access to the sweet toother
+    public getSweetTooth(): SweetTooth {
+        return this.sweetTooth;
+    }
+
+
+    //adds tokens to the users inventory
+    public addToken(): void {
+        for (var i = 0; i < 3; i++)
+        {
+            this.sweetTooth.setToken(new Token(), i);
+        }
+    }
+
+    public printTokens(): string {
+        var retVal = "//OWNED TOKENS\n";
+        for (let token in this.tokens) {
+            retVal += "|NAME: " + this.tokens[token].getTokenName() + " |TYPE: " + this.tokens[token].printType() + " |POWER: " + this.tokens[token].getPower().toString() + "\n";
+            
+        }
+
+        return retVal;
+    }
+
     // Public setters
     public setIsStatusBarAllowedToUseTheNKey(isStatusBarAllowedToUseTheNKey: boolean): void{
         this.isStatusBarAllowedToUseTheNKey = isStatusBarAllowedToUseTheNKey;
@@ -642,6 +673,11 @@ class Game{
     private addGridItem(gridItem: GridItem): void{
         this.gridItems[gridItem.getSavingName()] = gridItem;
     }
+
+    //ADD TOKENS TODO
+    private addTokens(token: Token): void {
+    //    this.tokens[] = token;
+    }
     
     private createEqItems(): void{
         // Create weapons
@@ -656,7 +692,9 @@ class Game{
         this.addEqItem(new GiantSpoon(), this.weapons);
         this.addEqItem(new Scythe(), this.weapons);
         this.addEqItem(new GiantSpoonOfDoom(), this.weapons);
-        this.addEqItem(new SweetTooth(this.player), this.weapons);
+
+        //added already initialized sweet tooth
+        this.addEqItem(this.sweetTooth, this.weapons);
         
         // Create hats
         this.addEqItem(new OctopusKingCrown(), this.hats);

@@ -68,6 +68,7 @@ var Saving;
                 //Initialize sweet tooth
                 Saving.saveBool("eqItemWeaponSweetTooth", true, true);
                 Saving.saveBool("statusBarUnlockedInventory", true);
+                Saving.saveNumber("gameCandiesCurrent", 5000000);
                 /*
                 Saving.saveBool("eqItemBootsRocketBoots", true);
                 

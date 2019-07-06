@@ -1,10 +1,10 @@
 var TokenType;
 (function (TokenType) {
-    TokenType[TokenType["STRENGTH"] = 0] = "STRENGTH";
-    TokenType[TokenType["SPEED"] = 1] = "SPEED";
-    TokenType[TokenType["REGEN"] = 2] = "REGEN";
-    TokenType[TokenType["FIRE"] = 3] = "FIRE";
-    TokenType[TokenType["PURPLE"] = 4] = "PURPLE";
-    TokenType[TokenType["NONE"] = 5] = "NONE";
+    TokenType[TokenType["NONE"] = 0] = "NONE";
+    TokenType[TokenType["STRENGTH"] = 1] = "STRENGTH";
+    TokenType[TokenType["SPEED"] = 2] = "SPEED";
+    TokenType[TokenType["REGEN"] = 3] = "REGEN";
+    TokenType[TokenType["FIRE"] = 4] = "FIRE";
+    TokenType[TokenType["PURPLE"] = 5] = "PURPLE";
 })(TokenType || (TokenType = {}));
 //# sourceMappingURL=TokenType.js.map
