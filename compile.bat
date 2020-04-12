@@ -8,8 +8,6 @@ call yuicompressor >nul 2>&1 && (echo Yuicompressor ok) || (echo Yuicompressor i
 
 call tsc >nul 2>&1 && (echo Typescript compiler ok) || (echo The typescript compiler is not installed ! && goto end)
 
-call 7z >nul 2>&1 && (echo 7zip ok) || (echo 7zip is not installed ! && goto end)
-
 :: Update the version written in the cacheManifest.mf file to force update of the whole game (see https://developer.mozilla.org/en-US/docs/HTML/Using_the_application_cache )
 
 cd pythonScripts
@@ -60,13 +58,6 @@ type candybox2_uncompressed.js.temp >> candybox2_uncompressed.js
 
 del candybox2.js.temp
 del candybox2_uncompressed.js.temp
-
-:: Create the .zip file we will give to others if they want to work on the game too :)
-
-call 7z a candybox2.zip ascii code css libs pythonScripts text ascii_art.html cacheManifest.mf candybox2.js candybox2_sourceCodeLicense.txt candybox2_uncompressed.js compile.bat compile.sh create_quest.html faq.html favicon.png index.html install_tsc.html source_code.html | findstr /b /r /c:"\<Everything is Ok" /c:"\<Scanning" /c:"\<Creating archive"
-
-:: Create the .zip file we will give to others if they want to work on the ascii art :)
-
 
 :end
 pause
