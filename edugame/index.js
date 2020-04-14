@@ -1,5 +1,4 @@
 const gameElementApiURL = "https://education-game-tool-2020.herokuapp.com";
-// const gameElementApiURL = "localhost:8090"; // dev
 
 const createNewSession = (lessonId, playerName = 'NO NAME SPECIFIED') => {
   $.post(`${gameElementApiURL}/lesson/${lessonId}/session/register`,
@@ -43,7 +42,11 @@ const uuidv4 = () => {
  */
 const startGame = () => {
   // FIXME: get lessonId from input
-  createNewSession("candy")
+  if (window.gameEnded !== false)
+    createNewSession("candy")
+  else {
+    console.warn("A game session is already in progress");
+  }
 }
 
 // const edugameContainer = $("##htmlcanvas-edugame-script-0")[0];
