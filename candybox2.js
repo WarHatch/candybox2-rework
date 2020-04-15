@@ -1800,7 +1800,7 @@ this.player=new Player(this);this.candies=new Candies(this,"gameCandies");this.l
 this.chocolateBars=new ChocolateBars(this,"gameChocolateBars");this.painsAuChocolat=new PainsAuChocolat(this,"gamePainsAuChocolat");
 this.candiesEaten=new CandiesEaten(this,"gameCandiesEaten");this.candiesThrown=new CandiesThrown(this,"gameCandiesThrown");
 this.updateStatusBar();this.oneSecondIntervalId=window.setInterval(this.oneSecondMethod.bind(this),1000);
-window.setTimeout(this.questMethod.bind(this),100)}a.prototype.addHotkey=function(b){this.hotkeys[b.getKeyString()]=b
+window.setTimeout(this.questMethod.bind(this),100)}a.prototype.addHotkey=function(b){console.warn("addHotkey disabled")
 };a.prototype.addSpecialHotkey=function(b){this.specialHotkeys.push(b)};a.prototype.applyInvertedColorsToCss=function(){if(Saving.loadBool("gameInvertedColors")==false){$("#invertColorsStylesheet").remove()
 }else{$("head").append('<link href="css/invertColors.css" rel="stylesheet" id="invertColorsStylesheet"/>')
 }};a.prototype.calcLollipopFarmProduction=function(){Saving.saveBool("lollipopFarmIsProductionEachSecond",this.isLollipopFarmProductionEachSecond());

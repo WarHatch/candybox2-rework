@@ -9551,7 +9551,9 @@ var Game = /** @class */ (function () {
     }
     // Public methods
     Game.prototype.addHotkey = function (hotkey) {
-        this.hotkeys[hotkey.getKeyString()] = hotkey;
+        // DEPRECATED
+        // this.hotkeys[hotkey.getKeyString()] = hotkey;
+        console.warn("addHotkey disabled");
     };
     Game.prototype.addSpecialHotkey = function (hotkey) {
         this.specialHotkeys.push(hotkey);
