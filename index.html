@@ -20,7 +20,14 @@
   <div id="game">
     <div id="#htmlcanvas-edugame-script-0"></div>
   </div>
-  <button id="play-edugame-button"> Play EduGame! </button>
+  <form id="edugameForm"> <!--onsubmit added through script-->
+    <label>Pamokos kodas:</label>
+    <input name="lessonIdInput" type="text" required />
+    <label>Tavo pilnas vardas:</label>
+    <input name="studentInput" type="text" required />
+    <input id="eduGameFormSubmit" type="submit" value="Pradėti edu-žaidimą!" />
+  </form>
+
   <div id="aroundStatusBar">
     <pre id="statusBar"></pre>
   </div>

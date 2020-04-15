@@ -29,27 +29,25 @@ const mountScript = () => {
   document.body.appendChild(newScript);
 }
 
-// TODO: could be handled on server-side
 const uuidv4 = () => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
 }
 
-/**
- * Expects that gameCanvas already exists in DOM
- */
-const startGame = () => {
-  // FIXME: get lessonId from input
-  if (window.gameEnded !== false)
-    createNewSession("candy")
-  else {
-    console.warn("A game session is already in progress");
+// reads event input and starts the game
+const startGame = (e) => {
+  e.preventDefault();
+  if (window.gameEnded !== false) {
+    const lessonIdInput = e.target[0].value;
+    const studentIdInput = e.target[1].value;
+    // Expects that gameCanvas already exists in DOM
+    createNewSession(lessonIdInput, studentIdInput)
+  } else {
+    alert("⚠ Žaidimo sesijau jau vyksta")
   }
 }
 
-// const edugameContainer = $("##htmlcanvas-edugame-script-0")[0];
-
-const edugameButton = $("#play-edugame-button")[0];
-edugameButton.addEventListener('click', startGame);
+const edugameForm = $("#edugameForm")[0];
+edugameForm.addEventListener('submit', startGame);
