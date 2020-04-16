@@ -1,0 +1,16 @@
+{
+  "name": "candybox-with-education-plugin",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "git@github.com:WarHatch/candybox2-rework.git",
+  "author": "Karolis Staskevičius <staskeviciuskarolis@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node server.js"
+  }
+}
