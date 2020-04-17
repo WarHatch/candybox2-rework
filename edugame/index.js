@@ -26,7 +26,7 @@ const setGlobalParams = (newSessionData, canvasWidth, canvasHeight) => {
 const mountScript = () => {
   var newScript = document.createElement("script");
   // newScript.src = gameElementApiURL + "/bundle.js";
-  newScript.src = __dirname + "/edu.js";
+  newScript.src = "/edu.js";
   document.body.appendChild(newScript);
 }
 
