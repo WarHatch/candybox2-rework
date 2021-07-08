@@ -33,7 +33,7 @@ var __extends = (this && this.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -9551,7 +9551,9 @@ var Game = /** @class */ (function () {
     }
     // Public methods
     Game.prototype.addHotkey = function (hotkey) {
-        this.hotkeys[hotkey.getKeyString()] = hotkey;
+        // DEPRECATED
+        // this.hotkeys[hotkey.getKeyString()] = hotkey;
+        console.warn("addHotkey disabled");
     };
     Game.prototype.addSpecialHotkey = function (hotkey) {
         this.specialHotkeys.push(hotkey);
@@ -12392,7 +12394,7 @@ var MainLoadingType;
     MainLoadingType[MainLoadingType["FILE"] = 2] = "FILE";
 })(MainLoadingType || (MainLoadingType = {}));
 ///<reference path="Game.ts"/>
-///<reference path="C:\Users\Odysseus\Documents\Projects\candybox2\candybox2remastered\libs\jquery.d.ts"/>
+///<reference path="../../libs/jquery.d.ts"/>
 ///<reference path="./MainLoadingType.ts"/>
 var Main;
 (function (Main) {

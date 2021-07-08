@@ -177,7 +177,9 @@ class Game{
     
     // Public methods
     public addHotkey(hotkey: Hotkey){
-        this.hotkeys[hotkey.getKeyString()] = hotkey;
+        // DEPRECATED
+        // this.hotkeys[hotkey.getKeyString()] = hotkey;
+        console.warn("addHotkey disabled");
     }
     
     public addSpecialHotkey(hotkey: Hotkey){
